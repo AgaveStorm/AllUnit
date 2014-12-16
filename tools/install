@@ -1,0 +1,6 @@
+#!/bin/sh
+
+destination='/usr/local/bin';
+source='/usr/share/php/allunit/tools';
+
+ln -s ${source}/createUser.php ${destination}/createAuUser

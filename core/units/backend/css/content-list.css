@@ -1,0 +1,30 @@
+.bk-content-list {}
+.bk-content-list .item {
+    column-width: 100px;
+}
+.bk-content-list .item.odd{
+    background: #eee;
+}
+.bk-content-list .item .field {
+    display: inline-block;
+    width: 150px;
+}
+.bk-content-list .item .field>.inner {
+    padding: 4px;
+    text-align: center;
+}
+.bk-content-list .item a.button {
+    color: #008000;
+}
+.bk-content-list .item a.button:hover {
+    text-shadow: 0 0 2px #ddf;
+}
+
+.bk-content-list-top .button {
+    padding: 6px;
+    margin: 6px;
+    border-radius: 4px;
+    color: #222;
+    box-shadow: 0 0 1px #aaa;
+    display: inline-block;
+}

@@ -1,0 +1,6 @@
+{
+    "class":"TUnitManagementContainer",
+    "design":{
+        "TUnitManagementContainer":"design/TUnitManagementContainer.xsl"
+    }
+}

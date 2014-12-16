@@ -1,0 +1,10 @@
+{
+    "class":"TVhFilesUnitControl",
+    "design": {
+        "TVhFilesUnitControl"       :"design/TVhFilesUnitControl.xsl",
+        
+        "TVhFilesControl"           :"vihv/project/vhfiles/design/Main.xsl",
+        "TVhFilesTagCloudControl"   :"vihv/project/vhfiles/design/Cloud.xsl",
+        "TVhFilesListControl"       :"vihv/project/vhfiles/design/List.xsl"
+    }
+}

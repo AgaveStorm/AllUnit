@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Roboto Slab';
+    src: url(fonts/RobotoSlab-Light.eot);
+    src: url('fonts/RobotoSlab-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('fonts/RobotoSlab-Light.ttf')  format('truetype');
+}
+/*@font-face {
+    font-family: 'AuIcons';
+    src: url(fonts/au-icon-font.eot);
+    src: url('fonts/au-icon-font.eot?#iefix') format('embedded-opentype'),  IE6-IE8 
+            url('fonts/au-icon-font.ttf')  format('truetype');
+}*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto Slab';
+    /*background: url(@auUrl/units/backend/img/bg.png);*/
+    font-size: 12px;
+    color: #222;
+    text-shadow: -1px 1px 3px #fff;
+}
+.clear {
+    clear: both;
+}
+/*i.au {
+    font-family: 'AuIcons';
+    font-style: normal;
+    font-weight: 100;
+    text-shadow: none;
+}
+i.au.au-icon-dark:before {
+    content: '1';   
+}
+i.au.au-icon-light:before {
+    content: '2';
+}*/
+
+.main-wrapper {
+    /*margin-left: 156px;*/
+    padding: 10px;
+}

@@ -1,0 +1,6 @@
+{
+    "class":"TAuMenuManagementContainer",
+    "design":{
+        "TAuMenuManagementContainer":"design/TAuMenuManagementContainer.xsl"
+    }
+}

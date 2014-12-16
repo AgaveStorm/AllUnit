@@ -1,0 +1,17 @@
+{
+    "class":"TBackendContainer",
+    "design": {
+        "TBackendContainer"         :"design/TBackendContainer.xsl",
+        
+        "TBkHeaderContainer"        :"design/misc/TBkHeaderContainer.xsl",
+        "TBkHeaderMenuControl"      :"design/misc/TBkHeaderMenuControl.xsl",
+        "TBkMainWrapperContainer"   :"design/misc/TBkMainWrapperContainer.xsl",
+        "TBkLoginControl"           :"design/misc/TBkLoginControl.xsl",
+        
+        "TBkSiteOptionsControl"     :"design/site/TBkSiteOptionsControl.xsl",
+        "TBkContentTypesContainer"  :"design/content/TBkContentTypesContainer.xsl",
+        "TBkContentTypeListControl" :"design/content/TBkContentTypeListControl.xsl",
+        "TBkContentListControl"     :"design/content/TBkContentListControl.xsl",
+        "TBkContentEditControl"     :"design/content/TBkContentEditControl.xsl"
+    }
+}
