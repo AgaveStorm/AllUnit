@@ -47,3 +47,14 @@ i.au.au-icon-light:before {
     /*margin-left: 156px;*/
     padding: 10px;
 }
+
+input[type='submit'] {
+    background: #099;
+    color: #fff;
+    font-family: 'Roboto';
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin: 6px 0;
+    cursor: pointer;
+}
