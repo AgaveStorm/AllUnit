@@ -1,9 +1,10 @@
-@font-face {
+@import url(http://fonts.googleapis.com/css?family=Roboto:600,700,400,500);
+/*@font-face {
     font-family: 'Roboto Slab';
     src: url(fonts/RobotoSlab-Light.eot);
-    src: url('fonts/RobotoSlab-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    src: url('fonts/RobotoSlab-Light.eot?#iefix') format('embedded-opentype'),  IE6-IE8 
             url('fonts/RobotoSlab-Light.ttf')  format('truetype');
-}
+}*/
 /*@font-face {
     font-family: 'AuIcons';
     src: url(fonts/au-icon-font.eot);
@@ -17,9 +18,12 @@ html, body {
 }
 
 body {
-    font-family: 'Roboto Slab';
+    /*font-family: 'Roboto Slab';*/
+    font-family: 'Roboto';
     /*background: url(@auUrl/units/backend/img/bg.png);*/
+    background: #fff url(../img/bg1.png);
     font-size: 12px;
+    /*font-weight: 700;*/
     color: #222;
     text-shadow: -1px 1px 3px #fff;
 }

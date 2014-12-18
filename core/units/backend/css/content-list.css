@@ -21,10 +21,16 @@
 }
 
 .bk-content-list-top .button {
-    padding: 6px;
+    padding: 6px 14px;
     margin: 6px;
     border-radius: 4px;
-    color: #222;
-    box-shadow: 0 0 1px #aaa;
+    color: #fff;
+    /*box-shadow: 0 0 1px #aaa;*/
     display: inline-block;
+    background: #099;
+    text-shadow: none;
+    text-decoration: none;
+}
+.bk-content-list-top .button i.fa {
+    margin-right: 6px;
 }

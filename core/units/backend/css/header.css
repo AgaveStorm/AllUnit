@@ -1,13 +1,16 @@
 
 .header {
-    background: #fefefe;
+    /*background: #fefefe;*/
+    background: #099;
     border-bottom: 1px solid #eee;
     padding: 10px 10px 9px 10px;
+    color: #fff;
 }
 .header h1 {
     margin: 0;
     font-size: 12px;
     float: left;
+    text-shadow: none;
 }
 
 .header .logo {

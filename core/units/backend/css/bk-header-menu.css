@@ -8,3 +8,13 @@
     list-style: none;
     padding: 0 12px;
 }
+
+.bk-header-menu li a {
+    color: #fff;
+    text-shadow: none;
+    text-decoration: none;
+}
+
+.bk-header-menu li a:hover {
+    text-shadow: -1px 1px 3px #fff;
+}
