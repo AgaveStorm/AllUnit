@@ -3,6 +3,7 @@
     <xsl:template match="TBkContentListControl">
         <xsl:variable name="permalink" select="permalink"/>
         <xsl:variable name="fields" select="fields"/>
+        <xsl:variable name="sortLinks" select="sortLinks"/>
         
         <div class="bk-content-list-top">
             <a href="{$permalink}/add" class="button">
@@ -13,9 +14,12 @@
         <div class="bk-content-list">
             <div class="item odd">
                 <xsl:for-each select="$fields/item">
+                    <xsl:variable name="field" select="."/>
                     <div class="field">
                         <div class="inner">
                             <xsl:value-of select="title"/>
+                            &#160;<a href="{$sortLinks/item[name=$field/name]/asc}"><i class="fa fa-caret-up"/></a>
+                            <a href="{$sortLinks/item[name=$field/name]/desc}"><i class="fa fa-caret-down"/></a>
                         </div>
                     </div>
                 </xsl:for-each>

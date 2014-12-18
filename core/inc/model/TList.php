@@ -39,6 +39,10 @@ abstract class TList {
 		return $res;
 	}
 	
+	public function getTotal() {
+		return R::count($this->getViewName());
+	}
+	
 	public function getList($Input) {
 		$fields = $this->getFields();
 		
