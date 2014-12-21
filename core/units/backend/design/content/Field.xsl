@@ -5,7 +5,14 @@
         <xsl:param name="value"/>
         <div class="field field-{$field/name} field-type-{$field/type}" title="{$field/title}">
             <div class="inner">
-                <xsl:value-of select="$value"/>
+                <xsl:choose>
+                    <xsl:when test="$field/type = 'img'">
+                        <img src="{//siteurl}/vhfiles?file={$value}&amp;w=100"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$value"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </div>
         </div>
     </xsl:template>

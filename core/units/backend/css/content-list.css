@@ -1,17 +1,21 @@
 .bk-content-list {}
 .bk-content-list .item {
-    column-width: 100px;
+/*    column-width: 150px;
+    -moz-column-width: 150px;*/
 }
 .bk-content-list .item.odd{
     background: #eee;
 }
 .bk-content-list .item .field {
     display: inline-block;
+    position: relative;
     width: 150px;
+    /*background: red;*/
 }
 .bk-content-list .item .field>.inner {
     padding: 4px;
     text-align: center;
+    /*height: 90%;*/
 }
 .bk-content-list .item a.button {
     color: #008000;
@@ -33,4 +37,22 @@
 }
 .bk-content-list-top .button i.fa {
     margin-right: 6px;
+}
+
+.bk-content-list .footrow {
+    position: fixed;
+    bottom: 0;
+    padding: 4px;
+    background: rgba(0, 153, 153, 0.9);
+}
+
+.bk-content-list .pagination .pagination-link {
+    padding: 4px;
+    color: #fff;
+    text-decoration: none;
+    /*background: rgba(0, 153, 153, 0.7);*/
+}
+.bk-content-list .pagination .pagination-link.current {
+    background: rgba(255,255,255, 0.3);
+    text-shadow: none;
 }

@@ -11,6 +11,7 @@
             </a>
             <div class="clear"/>
         </div>
+   
         <div class="bk-content-list">
             <div class="item odd">
                 <xsl:for-each select="$fields/item">
@@ -45,6 +46,16 @@
                     <div class="clear"/>
                 </div>
             </xsl:for-each>
+            <div class="pagination footrow">
+                <xsl:for-each select="paginationLinks/item">
+                    <a href="{link}" class="pagination-link">
+                        <xsl:if test="title = ../../currentPage">
+                            <xsl:attribute name="class">pagination-link current</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="title"/>
+                    </a>
+                </xsl:for-each>
+            </div>
         </div>
     </xsl:template>
     <xsl:include href="Field.xsl"/>
