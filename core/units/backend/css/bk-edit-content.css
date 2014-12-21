@@ -1,0 +1,10 @@
+.bk-edit-content .img-field .img-container {
+    width: 100px;
+    min-height: 100px;
+    border: 1px solid #222;
+}
+.bk-edit-content .img-field img{
+    max-height: 200px;
+    max-width: 200px;
+}
+

@@ -6,6 +6,7 @@ class TVhFilesUnitControl extends TAuUnitContainer {
 		TJs::add(TAu::urlRelay('vihv/project/vhfiles/vhajax.js'),'vhajax');
 		TJs::add(TAu::urlRelay('vihv/project/vhfiles/vhfiles.js'),'vhfiles',['vhajax']);
 		TCss::add(TAu::urlRelay('vihv/project/vhfiles/vhfiles.css'));
+		TCss::add(TAu::urlRelay($this->getUnitUrl()."/css/vhfiles.css"));
 		$this->location = new TLocation($this, 'vhfiles');
 	}
 	
@@ -15,6 +16,10 @@ class TVhFilesUnitControl extends TAuUnitContainer {
 		}
 		
 		require_once "vhfiles.php";
+	}
+	
+	function allowBackend() {
+		return true;
 	}
 
 }

@@ -65,8 +65,47 @@ class TBkContentListControl extends TControl {
 		$fieldNames = array_column($fields, 'name');
 		$Sender->Data['sortLinks'] = $this->createSortLinks($fieldNames);
 		$Sender->createFilterVals($Sender, $Input, $fieldNames);
+		$Sender->createRelatedLists($Sender);
 		
-		
+	}
+	
+	function getRelatedLists() {
+		$singleClass = $this->viewModel->getSingleModelName();
+		$single = new $singleClass();
+		$list = $single->getFields();
+		$res = [];
+		foreach($list as $item) {
+			if(!empty($item['list']) /*&& $item['type'] == 'multiid'*/) {
+				$res[] = $item['list'];
+			}
+		}
+		return $res;
+	}
+	
+	function createRelatedLists($Sender) {
+		foreach($this->getRelatedLists() as $listSlug) {
+
+			$factory = new TViewModelFactory();
+			$viewModel = $factory->createBySlug($listSlug);
+
+			if(empty($viewModel)) {
+				continue;
+			}
+			$list = $viewModel->getListModel();
+			$items = $list->getAll();
+			foreach($items as $item) {
+				$postData = array();
+				if(is_object($item)) {
+					$postData['id'] = $item->getId();
+					$postData['title'] = $item->getTitle();
+				}
+				if(is_array($item)) {
+					$postData['id'] = $item['id'];
+					$postData['title'] = $item['title'];
+				}
+				$Sender->Data[$listSlug][] = $postData;
+			}
+		}
 	}
 	
 	function createFilterVals($Sender, $Input, $fieldNames) {
@@ -94,6 +133,7 @@ class TBkContentListControl extends TControl {
 				$forJson[$item['name']] = $item['value'];
 			}
 			$Sender->Data['jsonFilter'] = json_encode($forJson);
+			
 		}
 	}
 	

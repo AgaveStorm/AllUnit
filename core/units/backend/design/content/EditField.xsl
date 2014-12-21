@@ -13,6 +13,16 @@
                     <xsl:when test="$field/type = 'text'">
                         <textarea name="{$field/name}"><xsl:value-of select="$value"/></textarea>
                     </xsl:when>
+                    <xsl:when test="$field/type = 'img'">
+                        <div class="img-field">
+                            <input id="image" type="hidden" name="{$field/name}" value="{$value}"/>
+                            <div class="img-container">
+                                <xsl:if test="$value != ''">
+                                    <img src="{//siteurl}/vhfiles?file={$value}&amp;w=100"/>
+                                </xsl:if>
+                            </div>
+                        </div>
+                    </xsl:when>
                     <xsl:otherwise>
                         <input type="text" name="{$field/name}" value="{$value}"/>
                     </xsl:otherwise>

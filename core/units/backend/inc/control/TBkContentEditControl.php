@@ -24,7 +24,8 @@ class TBkContentEditControl extends TControl {
 	}
 	
 	public function OnEnableEvent($Sender) {
-
+		TJs::add(TBackendContainer::getUnitUrlStatic()."/js/edit.js", null, ['jquery','vhfiles']);
+		TCss::add(TBackendContainer::getUnitUrlStatic()."/css/bk-edit-content.css");
 		$viewModel = $this->getViewModel();
 		
 		$singleClass= $viewModel->getSingleModelName();

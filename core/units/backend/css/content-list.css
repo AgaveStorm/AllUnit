@@ -10,6 +10,7 @@
     display: inline-block;
     position: relative;
     width: 150px;
+     word-wrap: break-word;
     /*background: red;*/
 }
 .bk-content-list .item .field>.inner {

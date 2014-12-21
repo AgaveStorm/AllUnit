@@ -31,15 +31,20 @@ abstract class TBaseViewModelFactory {
 	//abstract public function getReports();
 
 	public function createBySlug($slug) {
+//		var_dump($slug);
 		foreach($this->getViewModels() as $model) {
-			if($model::getSlug() == $slug) {
-				return new $model();
+//			var_dump($model);
+			$object = new $model();
+			if($object->getSlug() == $slug) {
+//				var_dump($object);
+				return $object;
 			}
 		}
 	}
         
         public function createByBean($bean) {
                 foreach($this->getViewModels() as $modelName) {
+//			var_dump($modelName);
                         $model = new $modelName();
 			if($model->getBean() == $bean) {
 				return $model;
