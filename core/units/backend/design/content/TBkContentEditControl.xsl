@@ -17,6 +17,9 @@
                 </xsl:for-each>
                 <div class="clear"/>
                 <input type="submit" name="onSaveClick" value="Save"/>
+                <xsl:if test="id">
+                    <input type="submit" name="onRemoveClick" value="Remove" onclick="return confirm('Do you want to remove this item?');"/>
+                </xsl:if>
             </form>
         </div>
     </xsl:template>

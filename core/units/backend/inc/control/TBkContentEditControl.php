@@ -60,16 +60,23 @@ class TBkContentEditControl extends TControl {
 		if(!$this->IsEnabled()) {
 			return;
 		}
-		var_dump($Input);
+//		var_dump($Input);
 		$viewModel = $this->getViewModel();
 		$list = $viewModel->getListModel();
-		if(empty($Input['id'])) {
-			$item = $list->create($Input);
-			$item->save();
-		} else {
+		if(!empty($Input['onSaveClick'])) {
+			if(empty($Input['id'])) {
+				$item = $list->create($Input);
+				$item->save();
+			} else {
+				$item = $list->getOne($Input['id']);
+				$item->setData($Input);
+				$item->save();
+			}
+		}
+		
+		if(!empty($Input['onRemoveClick'])) {
 			$item = $list->getOne($Input['id']);
-			$item->setData($Input);
-			$item->save();
+			$item->remove();
 		}
 		$this->GoBack();
 		exit;
