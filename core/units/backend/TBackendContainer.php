@@ -13,6 +13,7 @@ class TBackendContainer extends TAuUnitContainer {
 ////		var_dump($rbConf->getMark());
 //		$rbConf->InitRb();
 		TCss::add(self::getUnitUrlStatic()."/css/main.css");
+		TJs::add(TAu::urlRelay('allunit/thirdparty/jqueryui/js/jquery-1.10.2.js'),'jquery');
 		TMeta::add('robots','none');
 		$Sender->Enable();
 		$Sender->AddChild(new TBkHeaderContainer());

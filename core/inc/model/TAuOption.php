@@ -9,7 +9,7 @@ class TAuOption extends TSingle{
 	public function getFields() {
 		return [
 		    ['name'=>'name'],
-		    ['name'=>'value'],
+		    ['name'=>'value']
 		];
 	}
 

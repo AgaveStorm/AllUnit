@@ -8,8 +8,23 @@
                     <div class="colWidth">
                         <xsl:value-of select="title"/>
                     </div>
+                    
                     <div class="colWidth">
-                        <input type="text" name="{../../name/*[name()=$option/name]}" value="{value}"/>
+                        <xsl:choose>
+                            <xsl:when test="$option/type = 'bool'">
+                                <input type="checkbox" name="{../../name/*[name()=$option/name]}">
+                                    <xsl:if test="value = 1">
+                                        <xsl:attribute name="checked">checked</xsl:attribute>
+                                    </xsl:if>
+                                </input>
+                            </xsl:when>
+                            <xsl:when test="$option/type = 'textarea'">
+                                <textarea name="{../../name/*[name()=$option/name]}"><xsl:value-of select="value"/></textarea>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <input type="text" name="{../../name/*[name()=$option/name]}" value="{value}"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </div>
                     <div class="clear"/>
                 </xsl:for-each>

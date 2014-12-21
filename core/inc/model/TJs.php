@@ -80,4 +80,32 @@ class TJs {
 		//var_dump($js);
 		return $js;
 	}
+	
+	
+	function getMinified() {		
+		foreach(self::getAll() as $item) {
+			$pathinfo = pathinfo($item);
+			$list[$pathinfo['extension']][$pathinfo['dirname']][] = $pathinfo['basename'];
+		}
+		$re = array();
+		foreach($list['js'] as $key=>$value) {
+			$path = $key;
+			$exploded = explode('/', $path);
+			if(!empty($exploded)) {
+				if($exploded[0] != TAu::RELAY) {
+					$path = TAu::RELAY."/".$path;
+				}
+			}
+			$re[] = array('filename' => $path."/js.min?".implode(";",$value));
+		}
+		if(!empty($list['php'])) {
+			foreach($list['php'] as $path=>$files) {
+				foreach($files as $key=>$value) {
+					$re[] = array('filename'=>$path."/".$value);
+				}
+			}
+		}
+		return $re;
+	}
+	
 }

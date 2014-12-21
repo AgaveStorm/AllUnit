@@ -11,6 +11,8 @@
             </a>
             <div class="clear"/>
         </div>
+        
+        <xsl:call-template name="Filter"/>
    
         <div class="bk-content-list">
             <div class="item odd">
@@ -59,4 +61,5 @@
         </div>
     </xsl:template>
     <xsl:include href="Field.xsl"/>
+    <xsl:include href="Filter.xsl"/>
 </xsl:stylesheet>

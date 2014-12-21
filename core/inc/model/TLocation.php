@@ -29,6 +29,10 @@ class TLocation {
 		return $this->control;
 	}
 	
+	function getCurrentPath() {
+		return $_SERVER['REDIRECT_URL'];
+	}
+	
 	function current() {
 		$basePath = str_replace("/index.php","",$_SERVER['PHP_SELF']);
 		$thisPath = $_SERVER['REDIRECT_URL'];

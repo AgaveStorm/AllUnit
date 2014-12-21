@@ -14,6 +14,8 @@ class TBkContentListControl extends TControl {
 
 	function OnEnableEvent($Sender) {
 		TCss::add(TBackendContainer::getUnitUrlStatic()."/css/content-list.css");
+		TCss::add(TBackendContainer::getUnitUrlStatic()."/css/filter.css");
+		TJs::add(TBackendContainer::getUnitUrlStatic()."/js/filter.js", null, ['jquery']);
 		$vars = $this->location->getVars();
 		$slug = $vars[0];
 
@@ -60,7 +62,39 @@ class TBkContentListControl extends TControl {
 		
 		$Sender->Data['paginationLinks'] = $this->createPagination($Sender->Data['itemsperpage'], $list->getTotal());
 		$Sender->Data['currentPage'] = (int)$Input['page']+1;
-		$Sender->Data['sortLinks'] = $this->createSortLinks(array_column($fields, 'name'));
+		$fieldNames = array_column($fields, 'name');
+		$Sender->Data['sortLinks'] = $this->createSortLinks($fieldNames);
+		$Sender->createFilterVals($Sender, $Input, $fieldNames);
+		
+		
+	}
+	
+	function createFilterVals($Sender, $Input, $fieldNames) {
+		if(!empty($Input['FilterClick'])) {
+			$filter = [];
+			foreach($fieldNames as $field) {
+				if(empty($Input[$field])) {
+					continue;
+				}
+				if(is_array($Input[$field])) {
+//					if(empty($Input[$field]['from']) &&
+//						empty($Input[$field]['to'])) {
+//						continue;
+//						}
+				}
+				
+				$filter[] = [
+					'name' => $field,
+					'value' => $Input[$field]
+				];
+			}
+			$Sender->Data['filtervals'] = $filter;
+			$forJson = array();
+			foreach($filter as $item) {
+				$forJson[$item['name']] = $item['value'];
+			}
+			$Sender->Data['jsonFilter'] = json_encode($forJson);
+		}
 	}
 	
 	function createPagination($itemsperpage, $total) {

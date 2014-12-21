@@ -15,9 +15,30 @@ class TAuRelayControl extends TAuUnitContainer {
 		if(!empty($exploded)) {
 			$fileName = reset($exploded);
 		}
+		$pathinfo = pathinfo($fileName);
+//		var_dump($pathinfo);
 		$ext = TFile::GetExtension($fileName);
 		if(!in_array($ext, $this->getAcceptableExtensions())) {
 			throw new ERelay('Inacceptible!');
+		}
+		if($ext == 'min') {
+			$files = explode(";",$_SERVER['QUERY_STRING']);
+			$content = '';
+			foreach($files as $file) {
+				if(!in_array(TFile::GetExtension($file), $this->getAcceptableExtensions())) {
+					throw new ERelay('Inacceptible!');
+				}
+				$fileWithPath = $pathinfo["dirname"]."/".$file;
+				$path = TFile::SearchIncludePath($fileWithPath);
+				$content .= "\n".file_get_contents($path);
+			}
+			$mime = 'text/'.$pathinfo['filename'];
+			if($pathinfo['filename'] == 'js') {
+				$mime = 'text/javascript';
+			}
+			Header('Content-Type: '.$mime);
+			echo $content;
+			exit;
 		}
 		
 		$mime = 'text/'.$ext;
@@ -33,7 +54,7 @@ class TAuRelayControl extends TAuUnitContainer {
 	}
 	
 	function getAcceptableExtensions() {
-		return ['css','js','png','jpg','ttf','eot','woff','svg'];
+		return ['css','js','png','jpg','ttf','eot','woff','svg','min'];
 	}
 
 }

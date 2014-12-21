@@ -11,10 +11,20 @@ class TAuHeadControl extends TControl {
 	}
 	
 	function OnBeforeDisplayEvent($Sender) {
-		$Sender->Data['css'] = TCss::getAll();
-		$Sender->Data['js'] = TJs::getAll();
-		$Sender->Data['meta'] = TMeta::getAll();
 		$list = new TAuOptions();
+//		var_dump($list->getOption('minifyCss'));
+		if($list->getOption('minifyCss')) {
+			$Sender->Data['css'] = TCss::getMinified();
+		} else {
+			$Sender->Data['css'] = TCss::getAll();
+		}
+		if($list->getOption('minifyJs')) {
+			$Sender->Data['js'] = TJs::getMinified();
+		} else {
+			$Sender->Data['js'] = TJs::getAll();
+		}
+		$Sender->Data['meta'] = TMeta::getAll();
+		
 		$options = $list->getAll();
 		foreach($options as $option) {
 			$Sender->Data['option'][$option->get('name')] = $option->get('value'); 

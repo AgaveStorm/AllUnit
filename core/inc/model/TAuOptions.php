@@ -3,6 +3,8 @@
 require_once 'TList.php';
 require_once 'TAuOption.php';
 
+class EAuNoSuchOption extends Exception {};
+
 class TAuOptions extends TList {
 	public function getSingleModelName() {
 		return 'TAuOption';
@@ -11,6 +13,10 @@ class TAuOptions extends TList {
 		return [
 		     ['name'=>'siteTitle', 'title'=>'Site Title'],
 		     ['name'=>'author', 'title'=>'Author'],
+		     ['name'=>'minifyCss','title'=>'Minify CSS', 'type'=>'bool'],
+		     ['name'=>'minifyJs','title'=>'Minify Js', 'type'=>'bool'],
+		     ['name'=>'metaKeywords', 'title'=>'Default Meta Keywords'],
+		     ['name'=>'metaDescription', 'title'=>'Default Meta Description', 'type'=>'textarea']
 		];
 	}
 	
@@ -20,8 +26,24 @@ class TAuOptions extends TList {
 			$bean = R::dispense($this->getBeanType());
 			$bean->name = $name;
 		}
+		$option = $this->getOptionParamsByName($name);
+		
+		if($option['type'] == 'bool') {
+//			var_dump($option);
+//			var_dump($value);
+			$value = (bool)$value;
+		}
 		$bean->value = $value;
 		R::store($bean);
+	}
+	
+	public function getOptionParamsByName($name) {
+		foreach($this->getPossibleOptions() as $option) {
+			if($option['name'] == $name) {
+				return $option;
+			}
+		}
+		throw new EAuNoSuchOption();
 	}
 	
 	public function getOption($name) {
