@@ -1,0 +1,31 @@
+<xmlacl>
+<acl>
+	<!--
+	    allow files to be viewed by anyone
+	    this effects desplaying images, 
+	    to restrict displaing list of files work around TVhFilesListControl
+	    -->
+	<type>allow</type>
+	<action>any</action>
+	<resource>any</resource>
+	<user>any</user>
+</acl>
+<acl>
+	<!--
+	    only registred users can add files
+	    -->
+	<type>deny</type>
+	<action>OnAdd</action>
+	<resource>TVhFilesControl</resource>
+	<user>Anonymous</user>
+</acl>
+<acl>
+	<!--
+	    only registred users can see list and remove files
+	    -->
+	<type>deny</type>
+	<action>any</action>
+	<resource>TVhFilesListControl</resource>
+	<user>Anonymous</user>
+</acl>
+</xmlacl>

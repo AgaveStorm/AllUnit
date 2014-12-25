@@ -1,0 +1,20 @@
+<ModelConfig>
+	<IRbConfig class="TRbConfig" file="config/TRbConfig.php"/>
+        <IViewModelFactory class="TViewModelFactory" file="units/YOURUNITNAME/inc/viewModel/TViewModelFactory.php"/>
+        <IUsers class="TUsers" file="units/schemaeditor/inc/model/TUsers.php"/>
+        <IUserCreator class="TUserCreator" file="units/igarkaloto/inc/model/TUserCreator.php"/>
+
+        <IMysql class="TMysqli" file="vihv/db/TMysqli.php">
+		<!--
+		    change "file" attribute to point to different configuation file
+		    change content of configuration file to set proper host, user, pasword and database parameters to access your database.
+		    
+		    All tables are created automatically (no installation needed) so you need just to graint access for creating tables. Tables are named by model class name, so it'll be TVhFilesList and TSqlKeyValue. Not very complex, right, but think most people dont have this tables, if you need a way to set your own name just send us a feed back to feedback@vihv.org
+		   -->
+		<Config class="TMysqliConfig" file="config/TMysqlConfig.php"/>
+	</IMysql>
+	<!--
+	    by default we store files in mysql serialized with base64. However it is not suitable for huge files. Switching to vihv/db/TBdb.php will give you more speed and you can store up to 4gb. But this wont work on windows :(
+	    -->
+	<IKeyValue class="TSqlKeyValue" file="vihv/db/TSqlKeyValue.php"/>
+</ModelConfig>

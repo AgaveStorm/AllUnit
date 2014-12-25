@@ -3,4 +3,5 @@
 destination='/usr/local/bin';
 source='/usr/share/php/allunit/tools';
 
-ln -s ${source}/createUser.php ${destination}/createAuUser
+ln -s ${source}/createAuUser.php ${destination}/createAuUser
+ln -s ${source}/createAuProject.php ${destination}/createAuProject

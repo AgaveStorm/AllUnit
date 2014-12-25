@@ -1,0 +1,6 @@
+{
+    "class":"TSampleUnitContainer",
+    "design": {
+        "TSampleUnitContainer"          :"design/TSampleUnitContainer.xsl"
+    }
+}
