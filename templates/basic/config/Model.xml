@@ -1,8 +1,8 @@
 <ModelConfig>
 	<IRbConfig class="TRbConfig" file="config/TRbConfig.php"/>
         <IViewModelFactory class="TViewModelFactory" file="units/YOURUNITNAME/inc/viewModel/TViewModelFactory.php"/>
-        <IUsers class="TUsers" file="units/schemaeditor/inc/model/TUsers.php"/>
-        <IUserCreator class="TUserCreator" file="units/igarkaloto/inc/model/TUserCreator.php"/>
+        <IUsers class="TUsers" file="allunit/core/inc/model/TUsers.php"/>
+        <IUserCreator class="TUserCreator" file="allunit/core/inc/model/TUserCreator.php"/>
 
         <IMysql class="TMysqli" file="vihv/db/TMysqli.php">
 		<!--
