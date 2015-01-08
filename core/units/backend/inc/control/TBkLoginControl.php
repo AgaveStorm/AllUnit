@@ -37,7 +37,7 @@ class TBkLoginControl extends TControl {
 	function OnLoginEvent($Sender, $Input) {
 		$Input = TFormNames::decodeInput($this, $Input);
 		$list = TConfigManager::GetModel('IUsers', $this);
-		var_dump($list);
+//		var_dump($list);
 		$user = $list->getUserByLoginAndPassword($Input['login'], $Input['password']);
 		if(empty($user)) {
 			throw new EBkLogin('Wrong login or password');
