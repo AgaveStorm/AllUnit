@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 //error_reporting(E_ERROR);
-ini_set("include_path",ini_get("include_path").":".__DIR__);
+ini_set("include_path",ini_get("include_path").PATH_SEPARATOR.__DIR__);
 require_once "vihv/includeAll.php";
 require_once "allunit/core/inc/control/TAllUnitControl.php";
 require_once "vihv/control/TExceptionControl.php";

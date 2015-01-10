@@ -1,7 +1,7 @@
 <?php
 
 
-ini_set("include_path",ini_get("include_path").":".__DIR__);
+ini_set("include_path",ini_get("include_path").PATH_SEPARATOR.__DIR__);
 
 class TSampleUnitContainer extends TAuUnitContainer {
 	
