@@ -3,6 +3,7 @@
 require_once 'allunit/core/inc/model/TSingle.php';
 require_once 'allunit/core/inc/model/TList.php';
 require_once 'VBaseModel.php';
+require_once 'TViewModels.php';
 
 abstract class TBaseViewModelFactory {
 	
@@ -23,7 +24,7 @@ abstract class TBaseViewModelFactory {
 		foreach($list as $class) {
 			$file = $path."/".$class.".php";
 			if(file_exists($file)) {
-				require_once $file;
+				include_once $file;
 			}
 		}
 		

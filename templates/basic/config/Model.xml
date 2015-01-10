@@ -1,6 +1,6 @@
 <ModelConfig>
 	<IRbConfig class="TRbConfig" file="config/TRbConfig.php"/>
-        <IViewModelFactory class="TViewModelFactory" file="units/YOURUNITNAME/inc/viewModel/TViewModelFactory.php"/>
+        <IViewModelFactory class="TViewModelFactory" file="allunit/core/inc/viewModel/TViewModelFactory.php"/>
         <IUsers class="TUsers" file="allunit/core/inc/model/TUsers.php"/>
         <IUserCreator class="TUserCreator" file="allunit/core/inc/model/TUserCreator.php"/>
 
