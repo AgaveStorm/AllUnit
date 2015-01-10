@@ -1,6 +1,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase / #do not forget to change this path if you wish to install project as subfolder
+RewriteBase / 
+#do not forget to change this path if you wish to install project as subfolder
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

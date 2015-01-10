@@ -7,8 +7,9 @@
  */
 class TDebugControlConfig {
 	function IsEnabled() { 
-//		return true; 
-		return false;
+		$options = new TAuOptions();
+		$option = $options->getOption('developersEye');
+		return $option == 1;
 	}
 }
 

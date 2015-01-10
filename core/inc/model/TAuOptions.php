@@ -16,7 +16,8 @@ class TAuOptions extends TList {
 		     ['name'=>'minifyCss','title'=>'Minify CSS', 'type'=>'bool'],
 		     ['name'=>'minifyJs','title'=>'Minify Js', 'type'=>'bool'],
 		     ['name'=>'metaKeywords', 'title'=>'Default Meta Keywords'],
-		     ['name'=>'metaDescription', 'title'=>'Default Meta Description', 'type'=>'textarea']
+		     ['name'=>'metaDescription', 'title'=>'Default Meta Description', 'type'=>'textarea'],
+		     ['name'=>'developersEye','title'=>'Show developers eye (debug)', 'type'=>'bool'],
 		];
 	}
 	
