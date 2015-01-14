@@ -18,7 +18,7 @@ class TAuUnitContainer extends TContainer {
 	}
 	
 	function getTheme() {
-		return $this->config->design;
+		return @$this->config->design;
 	}
 	
 	function getPath() {
@@ -34,8 +34,13 @@ class TAuUnitContainer extends TContainer {
 		if(substr($base,0,1) == '/') {
 			$base = substr($base, 1); // fix for unexpected $_SERVER['PHP_SELF'] behaviour (depend on server and maybe php version)
 		}
-		$path = str_replace([$_SERVER['DOCUMENT_ROOT'].$base."/",
-		    '/usr/share/php/'], '', $this->getPath());
+		$whatToReplace = explode(PATH_SEPARATOR, ini_get("include_path"));
+		foreach($whatToReplace as $key=>$value) {
+			$whatToReplace[$key] = $value."/";
+		}
+		$whatToReplace[] = $_SERVER['DOCUMENT_ROOT'].$base."/";
+		$path = str_replace($whatToReplace, '', $this->getPath());
+//		var_dump($path);
 		return $path;
 	}
 	public function allowBackend() {

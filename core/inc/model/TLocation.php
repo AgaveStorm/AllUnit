@@ -35,13 +35,14 @@ class TLocation {
 	
 	function current() {
 		$basePath = str_replace("/index.php","",$_SERVER['PHP_SELF']);
-		$thisPath = $_SERVER['REDIRECT_URL'];
+		
+		$thisPath = @$_SERVER['REDIRECT_URL'];
 		$strippedPath = substr($thisPath,strlen($basePath."/"));
 		if(!is_array($this->slug)) {
 			$exploded = explode("/",$strippedPath);
 			if($this->slug == $strippedPath || (
 				$this->includeChildren
-				&& $exploded[0] == $this->slug
+				&& reset($exploded) == $this->slug
 				)) {
 				return true;
 			}
@@ -55,13 +56,13 @@ class TLocation {
 			$ok = true;
 			$this->vars = array();
 			foreach($exploded as $key=>$value) {
-				$ok = $ok && ($this->slug[$key] == $value 
-					|| $this->slug[$key] == "*"
+				$ok = $ok && (@$this->slug[$key] == $value 
+					|| @$this->slug[$key] == "*"
 					|| ( 
 						$key > count($this->slug)-1
 						&& $this->includeChildren
 						));
-				if($this->slug[$key] == "*" && !empty($value)) {
+				if(@$this->slug[$key] == "*" && !empty($value)) {
 					$this->vars[] = $value;
 				}
 			}

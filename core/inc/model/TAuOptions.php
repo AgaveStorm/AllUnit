@@ -49,6 +49,9 @@ class TAuOptions extends TList {
 	
 	public function getOption($name) {
 		$bean = R::findOne($this->getBeanType(), "name=:name LIMIT 1", array(":name"=>$name));
+		if($bean === null) {
+			return null;
+		}
 		return $bean->value;
 	}
 	
