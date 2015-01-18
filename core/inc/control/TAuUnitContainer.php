@@ -40,7 +40,6 @@ class TAuUnitContainer extends TContainer {
 		}
 		$whatToReplace[] = $_SERVER['DOCUMENT_ROOT'].$base."/";
 		$path = str_replace($whatToReplace, '', $this->getPath());
-//		var_dump($path);
 		return $path;
 	}
 	public function allowBackend() {

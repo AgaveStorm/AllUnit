@@ -4,7 +4,7 @@
         <ul class="bk-header-menu">
             <xsl:for-each select="menu/items/item">
                 <li>
-                    <a href="{//siteurl}/{slug}"><xsl:value-of select="title"/></a>
+                    <a href="{//siteurl}/{slug}"><xsl:value-of select="title" disable-output-escaping="yes"/></a>
                 </li>
             </xsl:for-each>
         </ul>
