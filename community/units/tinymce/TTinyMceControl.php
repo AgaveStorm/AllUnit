@@ -8,4 +8,9 @@ class TTinyMceControl extends TAuUnitContainer {
 	}
 
 
+	function allowBackend() {
+		return true;
+	}
+	
+	
 }
