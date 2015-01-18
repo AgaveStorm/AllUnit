@@ -10,7 +10,7 @@
             </div>
             <div class="value">
                 <xsl:choose>
-                    <xsl:when test="$field/type = 'text'">
+                    <xsl:when test="$field/type = 'text'" class="tinymce">
                         <textarea name="{$field/name}"><xsl:value-of select="$value"/></textarea>
                     </xsl:when>
                     <xsl:when test="$field/type = 'img'">
