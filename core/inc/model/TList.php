@@ -139,6 +139,9 @@ abstract class TList {
 					$filter[] = $prefix.$field['name']."_id = '" .$Input[$field['name']]."'";
 				}
 				break;
+			    case 'number':
+				    $filter[] = $field['name']." = '".$Input[$field['name']]."'";
+				    break;
 			    default:
 				$filter[] = $field['name']." LIKE '%".$Input[$field['name']]."%'";
 				break;

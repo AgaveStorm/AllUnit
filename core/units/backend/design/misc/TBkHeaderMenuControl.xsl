@@ -5,8 +5,10 @@
             <xsl:for-each select="menu/items/item">
                 <li>
                     <a href="{//siteurl}/{slug}"><xsl:value-of select="title" disable-output-escaping="yes"/></a>
+                    <xsl:call-template name="BkHeaderSubmenu"/>
                 </li>
             </xsl:for-each>
         </ul>
     </xsl:template>
+    <xsl:include href="BkHeaderSubmenu.xsl"/>
 </xsl:stylesheet>

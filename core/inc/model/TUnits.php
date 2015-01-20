@@ -51,8 +51,9 @@ class TUnits {
 			if(file_exists($filename)) {
 				$config = json_decode(file_get_contents($filename));
 				$class = $config->class;
+				$slug = str_replace($path."/",'',$folder);
 				require_once $folder.'/'.$class.'.php';
-				$this->addUnit(new $class($config, $folder, $level));
+				$this->addUnit(new $class($config, $folder, $level, $slug));
 			}
 		}
 	}

@@ -7,14 +7,49 @@
     float: left;
     list-style: none;
     padding: 0 12px;
+    position: relative;
 }
 
 .bk-header-menu li a {
     color: #fff;
     text-shadow: none;
     text-decoration: none;
+    
 }
 
 .bk-header-menu li a:hover {
     text-shadow: -1px 1px 3px #fff;
+}
+
+.bk-header-menu li .fa {
+    font-size: 14px;
+    position: relative;
+    bottom: -1px;
+}
+
+.bk-header-menu .bk-header-submenu {
+    position: absolute;
+    left: 0;
+    top: 15px;
+    background: #099;
+    padding: 10px 0 0 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:  opacity 0.9s;
+}
+.bk-header-menu li:hover .bk-header-submenu{
+    height: auto;
+    overflow: visible;
+    opacity: 1;
+}
+.bk-header-menu .bk-header-submenu li {
+    float: none;
+}
+.bk-header-menu .bk-header-submenu li a {
+    display: block;
+    padding: 6px 0;
+}
+.bk-header-menu .bk-header-submenu li:hover {
+    background: rgba(100,100,100,0.3);
 }

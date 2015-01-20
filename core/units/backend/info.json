@@ -1,5 +1,6 @@
 {
     "class":"TBackendContainer",
+    "title":"<i class='fa fa-gear'></i> Backend",
     "design": {
         "TBackendContainer"         :"design/TBackendContainer.xsl",
         

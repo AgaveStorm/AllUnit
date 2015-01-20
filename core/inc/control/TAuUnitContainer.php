@@ -5,11 +5,13 @@ class TAuUnitContainer extends TContainer {
 	private $config;
 	private $path;
 	private $level;
+	private $slug;
 	
-	function __construct($config, $path, $level) {
+	function __construct($config, $path, $level, $slug) {
 		$this->config = $config;
 		$this->path = $path;
 		$this->level = $level;
+		$this->slug = $slug;
 		//parent::__construct();
 	}
 	
@@ -27,6 +29,17 @@ class TAuUnitContainer extends TContainer {
 	
 	function getLevel() {
 		return $this->level;
+	}
+	
+	function getSlug() {
+		return $this->slug;
+	}
+	
+	function getTitle() {
+		if(@empty($this->config->title)) {
+			return $this->getSlug();
+		}
+		return $this->config->title;
 	}
 	
 	function getUnitUrl() {

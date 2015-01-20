@@ -13,6 +13,7 @@
                     <xsl:when test="$field/type = 'text'">
                         <textarea name="{$field/name}" class="tinymce"><xsl:value-of select="$value"/></textarea>
                     </xsl:when>
+
                     <xsl:when test="$field/type = 'img'">
                         <div class="img-field">
                             <input id="image" type="hidden" name="{$field/name}" value="{$value}"/>
