@@ -89,8 +89,9 @@ abstract class TSingle {
 		if($this->getFieldType($field) == 'date') {
 			return date('d.m.Y', strtotime($this->bean->$field));
 		}
-		if($this->getFieldType($field) == 'editor') {
-			
+		if($this->getFieldType($field) == 'editor'
+			|| $this->getFieldType($field) == 'text'
+			) {
 			return htmlspecialchars_decode($this->bean->$field);
 		}
 		return $this->bean->$field;
@@ -139,7 +140,7 @@ abstract class TSingle {
 			if($name == null) {
 				continue;
 			}
-			$res[$name] = $this->getE($name);
+			$res[$name] = TXml::cdata($this->getE($name));
 		}
 		return $res;
 	}

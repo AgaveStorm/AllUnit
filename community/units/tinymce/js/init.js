@@ -9,7 +9,12 @@ tinymce.init({
        ],
        toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
       // toolbar2: "print preview media | forecolor backcolor emoticons",
-       image_advtab: true
+       image_advtab: true,
+       relative_urls: false,
+
+        convert_urls: false,
+
+        remove_script_host : false
      });
 
 

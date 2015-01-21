@@ -11,7 +11,10 @@
             <div class="value">
                 <xsl:choose>
                     <xsl:when test="$field/type = 'text'">
-                        <textarea name="{$field/name}" class="tinymce"><xsl:value-of select="$value"/></textarea>
+                        <div class='textarea-container'>
+                            <div class="add-media-button button"><i class="fa fa-image"/> &#160; Add media</div>
+                            <textarea name="{$field/name}" class="tinymce"><xsl:value-of select="$value"/></textarea>
+                        </div>
                     </xsl:when>
 
                     <xsl:when test="$field/type = 'img'">

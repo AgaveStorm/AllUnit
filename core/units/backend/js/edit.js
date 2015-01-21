@@ -9,6 +9,16 @@ jQuery(document).ready(function(){
 //	    jQuery('#imagePic').html(html);
 	}, siteurl+"vhfiles");
     });
+    
+    jQuery('.add-media-button').click(function(){
+        var self = this;
+        new VhFiles(function(html, json){ 
+              /* this will insert image into active tinymce editor */
+              htmlToInsert = "<img src='"+siteurl+"vhfiles?file="+json.id+"' alt='"+json.value.name+"'/>";
+//              console.log(json);
+              tinymce.execCommand('mceInsertContent',false,htmlToInsert);
+        }, siteurl+"vhfiles");
+    });
 });
 
 

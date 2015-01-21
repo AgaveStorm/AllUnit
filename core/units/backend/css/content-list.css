@@ -15,6 +15,9 @@
      word-wrap: break-word;
     /*background: red;*/
 }
+.bk-content-list .item .field img {
+    max-width: 100%;
+}
 .bk-content-list .item .field>.inner {
     padding: 4px;
     text-align: center;

@@ -9,6 +9,9 @@
                     <xsl:when test="$field/type = 'img'">
                         <img src="{//siteurl}/vhfiles?file={$value}&amp;w=100"/>
                     </xsl:when>
+                    <xsl:when test="$field/type = 'text'">
+                        <xsl:value-of select="$value" disable-output-escaping="yes"/>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$value"/>
                     </xsl:otherwise>
