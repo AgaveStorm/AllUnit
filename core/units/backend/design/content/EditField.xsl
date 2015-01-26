@@ -27,8 +27,15 @@
                             </div>
                         </div>
                     </xsl:when>
+                    <xsl:when test="$field/type = 'id'">
+                        <div class="id-field" 
+                             data-list="{$field/list}" 
+                             data-name="{$field/name}"
+                             data-value="{$value}"/>
+                    </xsl:when>
                     <xsl:otherwise>
-                        <input type="text" name="{$field/name}" value="{$value}"/>
+                        <input type="text" name="{$field/name}" value="{$value}"
+                            class="field-{$field/type}"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>

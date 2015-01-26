@@ -19,6 +19,16 @@ jQuery(document).ready(function(){
               tinymce.execCommand('mceInsertContent',false,htmlToInsert);
         }, siteurl+"vhfiles");
     });
+    
+    
+    jQuery('.id-field').each(function(){
+       params = {
+           list: jQuery(this).attr('data-list'),
+           name: jQuery(this).attr('data-name'),
+           value: jQuery(this).attr('data-value')
+       };
+       jQuery(this).load(siteurl+"au-manage/select/", params);
+    });
 });
 
 

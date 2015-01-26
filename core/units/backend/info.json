@@ -13,6 +13,9 @@
         "TBkContentTypesContainer"  :"design/content/TBkContentTypesContainer.xsl",
         "TBkContentTypeListControl" :"design/content/TBkContentTypeListControl.xsl",
         "TBkContentListControl"     :"design/content/TBkContentListControl.xsl",
-        "TBkContentEditControl"     :"design/content/TBkContentEditControl.xsl"
+        "TBkContentEditControl"     :"design/content/TBkContentEditControl.xsl",
+        
+        "TBkAjaxContainer"          :"design/ajax/TBkAjaxContainer.xsl",
+        "TBkSelectIdControl"        :"design/ajax/TBkSelectIdControl.xsl"
     }
 }

@@ -81,7 +81,16 @@ abstract class TSingle {
 		return $this->bean->id;
 	}
 	public function getTitle() {
-		return $this->bean->title;
+		$fields = $this->getFields();
+		$names = array_column($fields, 'name');
+		if(in_array('title', $names)) {
+			return $this->get('title');
+		}
+		$field = reset($names);
+		if(!empty($field)) {
+			return $this->get($field);
+		}
+		return $this->getId();
 	}
 	
 	function get($field) {
@@ -107,6 +116,9 @@ abstract class TSingle {
 			if(!empty($id)) {
 				return $id;
 			}
+		}
+		if($this->getFieldType($field) == 'text') {
+			return TXml::cdata(htmlspecialchars_decode($this->bean->$field));
 		}
 		return htmlspecialchars_decode($this->bean->$field);
 	}
@@ -140,7 +152,7 @@ abstract class TSingle {
 			if($name == null) {
 				continue;
 			}
-			$res[$name] = TXml::cdata($this->getE($name));
+			$res[$name] = $this->getE($name);
 		}
 		return $res;
 	}

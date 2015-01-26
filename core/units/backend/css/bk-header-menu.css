@@ -37,6 +37,7 @@
     opacity: 0;
     overflow: hidden;
     transition:  opacity 0.9s;
+    z-index: 100;
 }
 .bk-header-menu li:hover .bk-header-submenu{
     height: auto;

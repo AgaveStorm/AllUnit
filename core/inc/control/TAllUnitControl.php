@@ -19,8 +19,9 @@ class TAllUnitControl extends TContainer {
 	public function OnCreateEvent($Sender) {
 		$list = TUnits::getInstance();
 		$list->initUnits();
-		
-		$Sender->AddChild(new TAuHeadControl());
+		if(!TAu::isAjax()) {
+			$Sender->AddChild(new TAuHeadControl());
+		}
 		$manageContainer = new TAuManageContainer();
 		if($manageContainer->myLocation->current()) {
 			$Sender->AddChild($manageContainer);

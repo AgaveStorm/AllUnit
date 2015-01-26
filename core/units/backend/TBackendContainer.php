@@ -2,6 +2,7 @@
 ini_set("include_path",ini_get("include_path").PATH_SEPARATOR.__DIR__);
 require_once 'inc/control/TBkHeaderContainer.php';
 require_once 'inc/control/TBkMainWrapperContainer.php';
+require_once 'inc/control/TBkAjaxContainer.php';
 
 class TBackendContainer extends TAuUnitContainer {
 	
@@ -16,6 +17,10 @@ class TBackendContainer extends TAuUnitContainer {
 		TJs::add(TAu::urlRelay('allunit/thirdparty/jqueryui/js/jquery-1.10.2.js'),'jquery');
 		TMeta::add('robots','none');
 		$Sender->Enable();
+		if(TAu::isAjax()) {
+			$Sender->AddChild(new TBkAjaxContainer());
+			return;
+		} 
 		$Sender->AddChild(new TBkHeaderContainer());
 		$Sender->AddChild(new TBkMainWrapperContainer());
 	}
