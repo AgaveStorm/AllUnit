@@ -11,6 +11,9 @@ class TBkSelectIdControl extends TControl {
 	
 
 	function OnPostEvent($Sender, $Input) {
+		if(!$this->IsEnabled()) {
+			return;
+		}
 		$factory = TConfigManager::GetModel('IViewModelFactory');
 		$list = $factory->createBySlug($Input['list'])->getListModel();
 		$items = $list->getAll();

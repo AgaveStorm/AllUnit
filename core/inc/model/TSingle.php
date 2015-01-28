@@ -1,5 +1,9 @@
 <?php
 
+require_once 'allunit/core/inc/fields/TField.php';
+require_once 'allunit/core/inc/fields/TBoolField.php';
+require_once 'allunit/core/inc/fields/TDefaultField.php';
+
 class EUniqueField extends Exception {}
 
 abstract class TSingle {
@@ -25,6 +29,16 @@ abstract class TSingle {
 	 * @important you do not need to create/update tables yourself. Database structure will be managed by AllUnit automatically 
 	 */
 	abstract public function getFields();
+	
+	public function getFieldObjects() {
+		$items = $this->getFields();
+		foreach($items as $key=>$value) {
+			if(is_array($value)) {
+				$items[$key] = new TDefaultField($value);
+			}
+		}
+		return $items;
+	}
 	
 	/**
 	 * @return bean type (in terms of RedBean ORM), aka table name 
@@ -124,17 +138,17 @@ abstract class TSingle {
 	}
 	
 	function getFieldType($fieldName) {
-		foreach($this->getFields() as $field) {
-			if($field['name'] == $fieldName) {
-				return $field['type'];
+		foreach($this->getFieldObjects() as $field) {
+			if($field->getName() == $fieldName) {
+				return $field->getType();
 			}
 		}
 	}
 	
 	public function getDataAsArray() {
 		$res = [];
-		foreach($this->getFields() as $field) {
-			$name = $field['name'];
+		foreach($this->getFieldObjects() as $field) {
+			$name = $field->getName();
 			if($name == null) {
 				continue;
 			}
@@ -147,8 +161,8 @@ abstract class TSingle {
 	 */
 	public function getDataAsArrayE() {
 		$res = [];
-		foreach($this->getFields() as $field) {
-			$name = $field['name'];
+		foreach($this->getFieldObjects() as $field) {
+			$name = $field->getName(); //['name'];
 			if($name == null) {
 				continue;
 			}
@@ -164,13 +178,13 @@ abstract class TSingle {
 	public function setData($input) {
 		//$dbacl = new TDbAcl();
 		
-		foreach($this->getFields() as $field) {
+		foreach($this->getFieldObjects() as $field) {
 			//$this->set($field['name'], $input[$field['name']]);
-			$name = $field['name'];
+			$name = $field->getName();
 //			if(!$dbacl->currentUserCan($this->getBeanType(), $name, 'w')) {
 //				continue;
 //			}
-			$type = $field['type'];
+			$type = $field->getType();
 			$empty = false;
 			if(is_array($input[$name])) {
 				$empty = empty($input[$name]);
@@ -184,23 +198,13 @@ abstract class TSingle {
 				continue;
 			}
 			// do not update password if new password is empty
-			if($field['type'] == 'passwd' || $this->isReadonlyField($name)) {
+			if($type == 'passwd' || $this->isReadonlyField($name)) {
 				if(empty($input[$name])) {
 					continue;
 				}
 			}
-			if($field['type'] == 'passwd') {
-				$input[$name] = sha1($input[$name]); // hash passwords
-			}
-			if($field['type'] == 'multiid') {
-				//var_dump($input); exit;
-				$input[$name] = TXml::MakeTree($input[$name],'ids');
-			}
-			if($field['type'] == 'date') {
-				$input[$name] = date('Y-m-d', strtotime($input[$name]));
-				$this->bean->setMeta('cast.'.$name,'date');
-			}
-			$this->bean->$name = $input[$name];
+			
+			$this->bean->$name = $field->beforeSet($input[$name], $this);
 		}
 //                var_dump($this->bean);
 	}

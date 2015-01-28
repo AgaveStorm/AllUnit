@@ -39,12 +39,10 @@ class TBkContentListControl extends TControl {
 
 		$singleClass = $viewModel->getSingleModelName();
 		$single = new $singleClass();
-		$fields = $single->getFields();
+		$fields = $single->getFieldObjects();
 		foreach($fields as $field) {
-			$temp = $field;
-			if(!isset($field['title'])) {
-				$temp['title'] = $field['name'];
-			}
+			$temp = $field->asArray();
+		
 			$Sender->Data['fields'][] = $temp;
 		}
 		$list = $viewModel->getListModel();
@@ -72,11 +70,11 @@ class TBkContentListControl extends TControl {
 	function getRelatedLists() {
 		$singleClass = $this->viewModel->getSingleModelName();
 		$single = new $singleClass();
-		$list = $single->getFields();
+		$list = $single->getFieldObjects();
 		$res = [];
 		foreach($list as $item) {
-			if(!empty($item['list']) /*&& $item['type'] == 'multiid'*/) {
-				$res[] = $item['list'];
+			if(!empty($item->get('list')) /*&& $item['type'] == 'multiid'*/) {
+				$res[] = $item->get('list');
 			}
 		}
 		return $res;

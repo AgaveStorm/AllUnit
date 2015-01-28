@@ -16,6 +16,9 @@
         "TBkContentEditControl"     :"design/content/TBkContentEditControl.xsl",
         
         "TBkAjaxContainer"          :"design/ajax/TBkAjaxContainer.xsl",
-        "TBkSelectIdControl"        :"design/ajax/TBkSelectIdControl.xsl"
+        "TBkSelectIdControl"        :"design/ajax/TBkSelectIdControl.xsl",
+        
+        "TBoolField"                :"design/fields/TBoolField.xsl",
+        "TDefaultField"             :"design/fields/TDefaultField.xsl"
     }
 }

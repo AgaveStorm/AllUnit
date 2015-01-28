@@ -22,10 +22,10 @@ abstract class TList {
 		return $this->getBeanType().'_view';
 	}
 	
-	public function getFields() {
+	public function getFieldObjects() {
 		$singleModel = $this->getSingleModelName();
 		$single = new $singleModel();
-		return $single->getFields();
+		return $single->getFieldObjects();
 	}
 	
 	public function getAll() {	
@@ -44,7 +44,7 @@ abstract class TList {
 	}
 	
 	public function getList($Input) {
-		$fields = $this->getFields();
+		$fields = $this->getFieldObjects();
 		
 		$where = $this->createWhere($fields, $Input);
 		$orderby = $this->createOrderBy($fields, $Input);
@@ -64,7 +64,7 @@ abstract class TList {
 	}
 	
 	public function getRandom($limit, $Input) {
-		$fields = $this->getFields();
+		$fields = $this->getFieldObjects();
 //		
 		$where = $this->createWhere($fields, $Input);
 //		var_dump($where);
@@ -99,51 +99,51 @@ abstract class TList {
 	function createWhere($fields, $Input, $table = null) {
 		$filter = array();
 		foreach ($fields as $field) {
-		    if (!empty($Input[$field['name']])) {
-			if (is_array($field['type'])) {
-			    $filter[] = $field['name'] . " = '" . $Input[$field['name']] . "'";
+		    if (!empty($Input[$field->getName()])) {
+			if (is_array($field->getType())) {
+			    $filter[] = $field->getName() . " = '" . $Input[$field->getName()] . "'";
 			    continue;
 			}
-			switch ($field['type']) {
+			switch ($field->getType()) {
 			    case 'date':
 			    case 'cardno':
-				$from = $Input[$field['name']]['from'];
-				$to = $Input[$field['name']]['to'];
+				$from = $Input[$field->getName()]['from'];
+				$to = $Input[$field->getName()]['to'];
 				if (!empty($from) && !empty($to)) {
 				    if ($field['type'] == 'date') {
 					$from = date('Y-m-d', strtotime($from));
 					$to = date('Y-m-d', strtotime($to));
 				    }
-				    $filter[] = $field['name']." BETWEEN '".$from."' AND '".$to."' ";
+				    $filter[] = $field->getName()." BETWEEN '".$from."' AND '".$to."' ";
 				} elseif (!empty($from)) {
-				    $filter[] = $field['name'] . "='".$from."'";
+				    $filter[] = $field->getName() . "='".$from."'";
 				}
 				break;
 			    case 'multiid':
-				$ids = $Input[$field['name']];
+				$ids = $Input[$field->getName()];
 				$comp = [];
 				foreach ($ids as $id) {
 				    $comp[] = '//item[.="'.$id .'"]';
 				}
-				$filter[] = "ExtractValue(".$field['name'].",'".implode(' | ', $comp)."') <> ''";
+				$filter[] = "ExtractValue(".$field->getName().",'".implode(' | ', $comp)."') <> ''";
 				break;
 			    case 'id':
 				    $prefix = '';
 				    if (!empty($table)) {
 					$prefix = $table.".";
 				    }
-				$ids = $Input[$field['name']];
+				$ids = $Input[$field->getName()];
 				if (is_array($ids)) {
-				    $filter[] = $prefix.$field['name']."_id IN ('".implode("','", $ids)."')";
+				    $filter[] = $prefix.$field->getName()."_id IN ('".implode("','", $ids)."')";
 				} else {
-					$filter[] = $prefix.$field['name']."_id = '" .$Input[$field['name']]."'";
+					$filter[] = $prefix.$field->getName()."_id = '" .$Input[$field->getName()]."'";
 				}
 				break;
 			    case 'number':
-				    $filter[] = $field['name']." = '".$Input[$field['name']]."'";
+				    $filter[] = $field->getName()." = '".$Input[$field->getName()]."'";
 				    break;
 			    default:
-				$filter[] = $field['name']." LIKE '%".$Input[$field['name']]."%'";
+				$filter[] = $field->getName()." LIKE '%".$Input[$field->getName()]."%'";
 				break;
 			}
 		    }
@@ -154,7 +154,7 @@ abstract class TList {
 	function createOrderBy( $fields, $Input) {
 		$fieldNames = array();
 		foreach($fields as $field) {
-			$fieldNames[] = $field['name'];
+			$fieldNames[] = $field->getName();
 		}
 		$orderby = 'id';
 		if(!empty($Input['sort'])) {
@@ -198,13 +198,13 @@ abstract class TList {
 	
 	function createJoins() {
 		$joins = '';
-		foreach($this->getFields() as $field) {
-			if($field['name'] == null) {
+		foreach($this->getFieldObjects() as $field) {
+			if($field->getName() == null) {
 				continue;
 			}
 			$factoryModel = TConfigManager::GetModel('IViewModelFactory');
 			$factory = new $factoryModel();
-			if(!empty($field['list']) && $field['type'] == 'id') {
+			if(!empty($field->get('list')) && $field->getType() == 'id') {
 				$viewModel = $factory->createBySlug($field['list']);
                                 if(empty($viewModel)) {
                                     $viewModel = $factory->createByBean($field['list']);
@@ -227,17 +227,17 @@ abstract class TList {
 	
 	function createFieldsToSelect() {
 		$fieldsToSelect = array();
-		foreach($this->getFields() as $field) {
-			if($field['name']==null) {
+		foreach($this->getFieldObjects() as $field) {
+			if($field->getName()==null) {
 				continue;
 			}
-			if($field['calc'] == true) {
+			if($field->get('calc') == true) {
 				continue;
 			}
-			$temp = "`".$this->getBeanType()."`.`".$field['name']."`";
+			$temp = "`".$this->getBeanType()."`.`".$field->getName()."`";
 			$factoryModel = TConfigManager::GetModel('IViewModelFactory');
 			$factory = new $factoryModel();
-			if(!empty($field['list']) && $field['type'] == 'id') {
+			if(!empty($field->get('list')) && $field->getType() == 'id') {
 				$viewModel = $factory->createBySlug($field['list']);
                                 if(empty($viewModel)) {
                                     $viewModel = $factory->createByBean($field['list']);

@@ -33,9 +33,14 @@
                              data-name="{$field/name}"
                              data-value="{$value}"/>
                     </xsl:when>
-                    <xsl:otherwise>
+                    <xsl:when test="$field/type = ''">
                         <input type="text" name="{$field/name}" value="{$value}"
                             class="field-{$field/type}"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="$field">
+                            <xsl:with-param name="value" select="$value"/>
+                        </xsl:apply-templates>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>

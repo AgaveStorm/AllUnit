@@ -31,12 +31,16 @@ class TBkContentEditControl extends TControl {
 		$singleClass= $viewModel->getSingleModelName();
 		$single = new $singleClass();
 		
-		$fields = $single->getFields();
+		$fields = $single->getFieldObjects();
 		foreach($fields as $field) {
-			$temp = $field;
-			if(!isset($field['title'])) {
-				$temp['title'] = $field['name'];
-			}
+			$temp = $field->asArray();
+			//$temp['title'] = $field->getTitle();
+//			if(!isset($field['title'])) {
+//				$temp['title'] = $field['name'];
+//			}
+//			if(!isset($field['template'])) {
+//				$temp['template'] = $field['name']."Field";
+//			}
 			$Sender->Data['fields'][] = $temp;
 		}
 		
