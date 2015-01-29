@@ -1,9 +1,9 @@
 <?php
 
 
-class TField {
+class TAuField {
 	public function __construct($params) {
-		TFields::add($this);
+		TAuFields::add($this);
 		$this->params = $params;
 	}
 
@@ -24,7 +24,7 @@ class TField {
 	 * @deprecated
 	 */
 	public function get($param) {
-		return $this->param[$param];
+		return $this->params[$param];
 	}
 	
 	public function asArray() {

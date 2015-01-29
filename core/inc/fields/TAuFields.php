@@ -1,7 +1,7 @@
 <?php
 
 
-class TFields {
+class TAuFields {
 	private static $instance;
 	private $items = array();
 	
@@ -9,13 +9,13 @@ class TFields {
 	
 	public function getInstance() {
 		if(empty(self::$instance)) {
-			self::$instance = new TFields();
+			self::$instance = new TAuFields();
 		}
 		return self::$instance;
 	}
 	
 	function add($field) {
-		$inst = TFields::getInstance();
+		$inst = TAuFields::getInstance();
 		$inst->items[] = $field;
 	}
 	

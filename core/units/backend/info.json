@@ -19,6 +19,7 @@
         "TBkSelectIdControl"        :"design/ajax/TBkSelectIdControl.xsl",
         
         "TBoolField"                :"design/fields/TBoolField.xsl",
-        "TDefaultField"             :"design/fields/TDefaultField.xsl"
+        "TDefaultField"             :"design/fields/TDefaultField.xsl",
+        "TMultiidField"             :"design/fields/TMultiidField.xsl"
     }
 }

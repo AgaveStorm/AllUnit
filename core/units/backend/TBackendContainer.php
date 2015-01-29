@@ -10,11 +10,14 @@ class TBackendContainer extends TAuUnitContainer {
 
 	function OnCreateEvent($Sender) {
 		self::$instance = $this;
-//		$rbConf = TConfigManager::GetModel("IRbConfig", $this);
-////		var_dump($rbConf->getMark());
-//		$rbConf->InitRb();
+
+		TCss::add(TAu::urlRelay('allunit/thirdparty/jqueryui/css/smoothness/jquery-ui-1.10.4.custom.min.css'));
+		TCss::add(TAu::urlRelay('allunit/thirdparty/multiselect/jquery.multiselect.css'));
 		TCss::add(self::getUnitUrlStatic()."/css/main.css");
+		
 		TJs::add(TAu::urlRelay('allunit/thirdparty/jqueryui/js/jquery-1.10.2.js'),'jquery');
+		TJs::add(TAu::urlRelay('allunit/thirdparty/jqueryui/js/jquery-ui-1.10.4.custom.min.js'),'jquery-ui',['jquery']);
+		TJs::add(TAu::urlRelay('allunit/thirdparty/multiselect/src/jquery.multiselect.min.js'),'multiselect', ['jquery']);
 		TMeta::add('robots','none');
 		$Sender->Enable();
 		if(TAu::isAjax()) {

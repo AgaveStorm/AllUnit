@@ -1,7 +1,7 @@
 <?php
 
 
-class TDefaultField extends TField implements IField {
+class TDefaultField extends TAuField implements IField {
 	public function beforeSet($value, $single) {
 		$type = $this->getType();
 		if($type == 'passwd') {

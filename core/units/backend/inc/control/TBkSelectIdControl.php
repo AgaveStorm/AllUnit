@@ -23,6 +23,9 @@ class TBkSelectIdControl extends TControl {
 			    'title'=>$item->getTitle()
 			];
 		}
+		if($Input['multiid'] == 'multiid') {
+			$Input['value'] = explode('/',$Input['value']);
+		}
 		$Sender->Data['params'] = $Input;
 	}
 

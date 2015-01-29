@@ -25,9 +25,20 @@ jQuery(document).ready(function(){
        params = {
            list: jQuery(this).attr('data-list'),
            name: jQuery(this).attr('data-name'),
-           value: jQuery(this).attr('data-value')
+           value: jQuery(this).attr('data-value'),
+           multiid: jQuery(this).attr('data-multiid')
        };
-       jQuery(this).load(siteurl+"au-manage/select/", params);
+       jQuery(this).load(siteurl+"au-manage/select/", params, function(){
+           jQuery(this).find('select.multiselect').multiselect({
+                multiple: true,
+                selectedList: 4 // 0-based index
+             });
+
+             jQuery(this).find('select.singleselect').multiselect({
+                multiple: false,
+                selectedList: 4 // 0-based index
+             });
+       });
     });
 });
 

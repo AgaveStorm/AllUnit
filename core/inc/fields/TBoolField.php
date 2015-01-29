@@ -2,7 +2,7 @@
 
 require_once 'allunit/core/interface/IField.php';
 
-class TBoolField extends TField implements IField {
+class TBoolField extends TAuField implements IField {
 	public function getType() {
 		return 'bool';
 	}

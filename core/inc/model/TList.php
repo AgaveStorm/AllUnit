@@ -191,8 +191,8 @@ abstract class TList {
 			SELECT  `".$this->getBeanType()."`.id, ".$sqlFields."
 			FROM `".$this->getBeanType()."`
 		".$joins;
-		//$sql = str_replace("\n",'',str_replace("\t",' ',$sql));
-		//var_dump($sql);
+//		$sql = str_replace("\n",'',str_replace("\t",' ',$sql));
+//		var_dump($sql);
 		R::exec($sql);
 	}
 	
@@ -205,16 +205,16 @@ abstract class TList {
 			$factoryModel = TConfigManager::GetModel('IViewModelFactory');
 			$factory = new $factoryModel();
 			if(!empty($field->get('list')) && $field->getType() == 'id') {
-				$viewModel = $factory->createBySlug($field['list']);
+				$viewModel = $factory->createBySlug($field->get('list'));
                                 if(empty($viewModel)) {
-                                    $viewModel = $factory->createByBean($field['list']);
+                                    $viewModel = $factory->createByBean($field->get('list'));
                                 }
                                 $list = $viewModel->getListModel();
 				$joins .= "
 					LEFT JOIN `".$list->getBeanType()."`
-						AS ".$list->getBeanType().$field['name']."	
+						AS ".$list->getBeanType().$field->getName()."	
 					ON (
-						`".$list->getBeanType().$field['name']."`.id = `".$this->getBeanType()."`.".$field['name']."
+						`".$list->getBeanType().$field->getName()."`.id = `".$this->getBeanType()."`.".$field->getName()."
 					)";
 			}
 		}
@@ -222,7 +222,9 @@ abstract class TList {
 	}
 	
 	public function titleToSelect($fieldName) {
-		return "`".$this->getBeanType().$fieldName."`.`title` AS `".$fieldName."`";
+		$class = $this->getSingleModelName();
+		$single = new $class();
+		return "`".$this->getBeanType().$fieldName."`.`".$single->getTitleField()."` AS `".$fieldName."`";
 	}
 	
 	function createFieldsToSelect() {
@@ -238,13 +240,14 @@ abstract class TList {
 			$factoryModel = TConfigManager::GetModel('IViewModelFactory');
 			$factory = new $factoryModel();
 			if(!empty($field->get('list')) && $field->getType() == 'id') {
-				$viewModel = $factory->createBySlug($field['list']);
+//				var_dump($field->get('list'));
+				$viewModel = $factory->createBySlug($field->get('list'));
                                 if(empty($viewModel)) {
-                                    $viewModel = $factory->createByBean($field['list']);
+                                    $viewModel = $factory->createByBean($field->get('list'));
                                 }
 				$list = $viewModel->getListModel();
-				$temp = $list->titleToSelect($field['name']);
-				$temp .= ",`".$list->getBeanType().$field['name']."`.`id` AS `".$field['name']."_id`";
+				$temp = $list->titleToSelect($field->getName());
+				$temp .= ",`".$list->getBeanType().$field->getName()."`.`id` AS `".$field->getName()."_id`";
 			}
 			$fieldsToSelect[] = $temp;
 		}

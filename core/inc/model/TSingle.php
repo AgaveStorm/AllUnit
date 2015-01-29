@@ -1,7 +1,8 @@
 <?php
 
-require_once 'allunit/core/inc/fields/TField.php';
+require_once 'allunit/core/inc/fields/TAuField.php';
 require_once 'allunit/core/inc/fields/TBoolField.php';
+require_once 'allunit/core/inc/fields/TMultiidField.php';
 require_once 'allunit/core/inc/fields/TDefaultField.php';
 
 class EUniqueField extends Exception {}
@@ -94,14 +95,26 @@ abstract class TSingle {
 	public function getId() {
 		return $this->bean->id;
 	}
-	public function getTitle() {
-		$fields = $this->getFields();
-		$names = array_column($fields, 'name');
+	
+	public function getTitleField() {
+		$fields = $this->getFieldObjects();
+		$names = [];
+		foreach($fields as $field) {
+			$names[] = $field->getName();
+		}
 		if(in_array('title', $names)) {
-			return $this->get('title');
+			return 'title';
 		}
 		$field = reset($names);
 		if(!empty($field)) {
+			return $field;
+		}
+		return 'id';
+	}
+	
+	public function getTitle() {
+		$field = $this->getTitleField();
+		if($field != 'id') {
 			return $this->get($field);
 		}
 		return $this->getId();
@@ -176,6 +189,7 @@ abstract class TSingle {
 	}
 	
 	public function setData($input) {
+//		var_dump($input); exit;
 		//$dbacl = new TDbAcl();
 		
 		foreach($this->getFieldObjects() as $field) {

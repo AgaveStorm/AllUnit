@@ -9,7 +9,7 @@ require_once 'TAuUnitContainer.php';
 require_once 'TAuManageContainer.php';
 require_once 'allunit/core/inc/model/TLocations.php';
 require_once 'allunit/core/inc/model/TFormNames.php';
-require_once "allunit/core/inc/fields/TFields.php";
+require_once "allunit/core/inc/fields/TAuFields.php";
 
 
 /**
@@ -47,10 +47,10 @@ class TAllUnitControl extends TContainer {
 	
 	function OnRootTemplateLoadEvent($Sender, $DOM) {
 		parent::OnRootTemplateLoadEvent($Sender, $DOM);
-		foreach(TFields::getList() as $field) {
+		foreach(TAuFields::getList() as $field) {
 			$Sender->AppendChildTemplate($field, $DOM);
 		}
-		echo $DOM->saveXml();
+//		echo $DOM->saveXml();
 	}
 	
 
