@@ -14,9 +14,9 @@
 class TDateTimeField extends TAuField {
 	function beforeSet($value, $single) {
 		$single->castSqlType($this->getName(),'datetime');
-		return date('Y-m-d H:i:s',strtotime($value));
+		return date('Y-m-d H:i:s',strtotime($value)); //@todo magick
 	}
 	function beforeGet($value, $single) {
-		return date('d.m.Y H:i',strtotime($value));
+		return date('d.m.Y H:i',strtotime($value)); //@todo magick
 	}
 }
