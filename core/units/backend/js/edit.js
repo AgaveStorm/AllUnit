@@ -40,6 +40,22 @@ jQuery(document).ready(function(){
              });
        });
     });
+    
+    jQuery('.datepicker.dateonly').datetimepicker({
+        format:'d.m.Y',
+        timepicker:false,
+        lang: 'ru' //@todo magick
+    });
+    jQuery('.datepicker.datetime').datetimepicker({
+        format:'d.m.Y H:i',
+        timepicker:true,
+        lang: 'ru' //@todo magick
+    });
+    jQuery('.datepicker.timeonly').datetimepicker({
+        format:'H:i',
+        datepicker:false,
+        lang: 'ru' //@todo magick
+    });
 });
 
 

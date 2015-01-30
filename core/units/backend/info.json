@@ -20,6 +20,9 @@
         
         "TBoolField"                :"design/fields/TBoolField.xsl",
         "TDefaultField"             :"design/fields/TDefaultField.xsl",
-        "TMultiidField"             :"design/fields/TMultiidField.xsl"
+        "TMultiidField"             :"design/fields/TMultiidField.xsl",
+        "TDateField"                :"design/fields/TDateField.xsl",
+        "TDateTimeField"            :"design/fields/TDateTimeField.xsl",
+        "TTimeField"                :"design/fields/TTimeField.xsl"
     }
 }

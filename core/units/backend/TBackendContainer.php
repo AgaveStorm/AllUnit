@@ -13,11 +13,14 @@ class TBackendContainer extends TAuUnitContainer {
 
 		TCss::add(TAu::urlRelay('allunit/thirdparty/jqueryui/css/smoothness/jquery-ui-1.10.4.custom.min.css'));
 		TCss::add(TAu::urlRelay('allunit/thirdparty/multiselect/jquery.multiselect.css'));
+		TCss::add(TAu::urlRelay('allunit/thirdparty/datetimepicker/jquery.datetimepicker.css'));
 		TCss::add(self::getUnitUrlStatic()."/css/main.css");
 		
 		TJs::add(TAu::urlRelay('allunit/thirdparty/jqueryui/js/jquery-1.10.2.js'),'jquery');
 		TJs::add(TAu::urlRelay('allunit/thirdparty/jqueryui/js/jquery-ui-1.10.4.custom.min.js'),'jquery-ui',['jquery']);
 		TJs::add(TAu::urlRelay('allunit/thirdparty/multiselect/src/jquery.multiselect.min.js'),'multiselect', ['jquery']);
+		TJs::add(TAu::urlRelay('allunit/thirdparty/datetimepicker/jquery.datetimepicker.js'),'datetimepicker',['jquery']);
+		
 		TMeta::add('robots','none');
 		$Sender->Enable();
 		if(TAu::isAjax()) {

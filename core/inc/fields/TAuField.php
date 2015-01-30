@@ -1,7 +1,8 @@
 <?php
 
+require_once 'allunit/core/interface/IField.php';
 
-class TAuField {
+class TAuField implements IField {
 	public function __construct($params) {
 		TAuFields::add($this);
 		$this->params = $params;
@@ -11,7 +12,10 @@ class TAuField {
 		return $this->params['name'];
 	}
 	public function getType() {
-		return $this->params['type'];
+		if(!empty($this->params['type'])) {
+			return $this->params['type'];
+		}
+		return get_class($this);
 	}
 	public function getTitle() {
 		if(!empty($this->params['title'])) {
@@ -40,7 +44,13 @@ class TAuField {
 		return $template;
 	}
 	
-	public function beforeSet($value) {
+	public function beforeSet($value, $single) {
 		return $value;
+	}
+	public function beforeGet($value, $single) {
+		return $value;
+	}
+	public function beforeGetE($value, $single) {
+		return $this->beforeGet($value, $single);
 	}
 }

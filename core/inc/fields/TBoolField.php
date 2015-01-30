@@ -7,7 +7,7 @@ class TBoolField extends TAuField implements IField {
 		return 'bool';
 	}
 	
-	public function beforeSet($value) {
+	public function beforeSet($value, $single) {
 		if($value == 'on') {
 			$value = true;
 		}

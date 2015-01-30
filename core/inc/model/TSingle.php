@@ -3,9 +3,13 @@
 require_once 'allunit/core/inc/fields/TAuField.php';
 require_once 'allunit/core/inc/fields/TBoolField.php';
 require_once 'allunit/core/inc/fields/TMultiidField.php';
+require_once 'allunit/core/inc/fields/TDateField.php';
+require_once 'allunit/core/inc/fields/TDateTimeField.php';
+require_once 'allunit/core/inc/fields/TTimeField.php';
 require_once 'allunit/core/inc/fields/TDefaultField.php';
 
 class EUniqueField extends Exception {}
+class EFieldObjectNotFound extends Exception {}
 
 abstract class TSingle {
 	
@@ -24,6 +28,7 @@ abstract class TSingle {
 	 * [
 	 *	    ['name'=>'login','title'=>'Login'],
 	 *	    ['name'=>'phone','title'=>'Phone Number'],
+	 *	    new TBoolField(['name'=>'boolfield']),
 	 *	    ['name'=>'passwd','title'=>'Password','type'=>'password']
 	 * ]
 	 * so we can describe database item in declarative way
@@ -31,6 +36,9 @@ abstract class TSingle {
 	 */
 	abstract public function getFields();
 	
+	/**
+	 * @return array of field obejcts see IField
+	 */
 	public function getFieldObjects() {
 		$items = $this->getFields();
 		foreach($items as $key=>$value) {
@@ -39,6 +47,14 @@ abstract class TSingle {
 			}
 		}
 		return $items;
+	}
+	public function getFieldObjectByName($name) {
+		foreach($this->getFieldObjects() as $item) {
+			if($item->getName() == $name) {
+				return $item;
+			}
+		}
+		throw new EFieldObjectNotFound();
 	}
 	
 	/**
@@ -84,8 +100,8 @@ abstract class TSingle {
 	}
 	
 	function isXmlField($name) {
-		foreach($this->getFields() as $field) {
-			if($field['type'] == 'multiid') {
+		foreach($this->getFieldObjects() as $field) {
+			if($field->getType() == 'multiid') {
 				return true;
 			}
 		}
@@ -121,33 +137,13 @@ abstract class TSingle {
 	}
 	
 	function get($field) {
-		//var_dump($this->getFieldType($field));
-		if($this->getFieldType($field) == 'date') {
-			return date('d.m.Y', strtotime($this->bean->$field));
-		}
-		if($this->getFieldType($field) == 'editor'
-			|| $this->getFieldType($field) == 'text'
-			) {
-			return htmlspecialchars_decode($this->bean->$field);
-		}
-		return $this->bean->$field;
+		$object = $this->getFieldObjectByName($field);
+		return $object->beforeGet($this->bean->$field, $this);
 	}
 	
 	function getE($field) {
-		if($this->getFieldType($field) == 'date') {
-			return date('d.m.Y', strtotime($this->bean->$field));
-		}
-		if($this->getFieldType($field) == 'id') {
-			$name = $field."_id";
-			$id = $this->bean->$name;
-			if(!empty($id)) {
-				return $id;
-			}
-		}
-		if($this->getFieldType($field) == 'text') {
-			return TXml::cdata(htmlspecialchars_decode($this->bean->$field));
-		}
-		return htmlspecialchars_decode($this->bean->$field);
+		$object = $this->getFieldObjectByName($field);
+		return $object->beforeGetE($this->bean->$field, $this);
 	}
 	
 	function getFieldType($fieldName) {
@@ -185,7 +181,8 @@ abstract class TSingle {
 	}
 	
 	public function set($field, $value) {
-		$this->bean->$field = $value;
+		$object = $this->getFieldObjectByName($field);
+		$this->bean->$field = $object->beforeSet($value);
 	}
 	
 	public function setData($input) {
@@ -221,6 +218,21 @@ abstract class TSingle {
 			$this->bean->$name = $field->beforeSet($input[$name], $this);
 		}
 //                var_dump($this->bean);
+	}
+	
+	/**
+	 * @param $name name of the field
+	 * @param $type sql type of the field, see RedBean docs for list of possible types
+	 * 
+	 * By default RedBean try to guess culumn type by content, however sometimes we need to force table column to use type we need
+	 * @example class TDateField extends TAuField {
+		function beforeSet($value, $single) {
+			$single->castSqlType($this->getName(),'date');
+			return $value;
+		} 
+	 */
+	function castSqlType($name, $type) {
+		$this->bean->setMeta('cast.'.$name,$type);
 	}
 	
 	/**

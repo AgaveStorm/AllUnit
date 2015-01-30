@@ -20,7 +20,7 @@ class TMultiidField extends TAuField {
 		return 'multiid';
 	}
 	
-	public function beforeSet($value) {
+	public function beforeSet($value, $single) {
 		$value = TXml::MakeTree($value,'ids');
 		var_dump($value);
 		return $value;
