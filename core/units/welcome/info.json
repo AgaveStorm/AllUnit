@@ -1,0 +1,9 @@
+{
+    "class":"TWelcomeContainer",
+    "title":"Welcome",
+    "design": {
+        "TWelcomeContainer"         :"design/TWelcomeContainer.xsl",
+        "TWlkCreateUser"            :"design/TWlkCreateUser.xsl",
+        "TWlkNavigateAuManage"      :"design/TWlkNavigateAuManage.xsl"
+    }
+}

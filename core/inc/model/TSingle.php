@@ -146,6 +146,10 @@ abstract class TSingle {
 		return $object->beforeGetE($this->bean->$field, $this);
 	}
 	
+	function getRaw($field) {
+		return $this->bean->$field;
+	}
+	
 	function getFieldType($fieldName) {
 		foreach($this->getFieldObjects() as $field) {
 			if($field->getName() == $fieldName) {

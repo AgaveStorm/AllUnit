@@ -14,6 +14,7 @@ class TAuManageContainer extends TContainer {
 	
 	function OnEnableEvent($Sender){
 		$list = TUnits::getInstance();
+		$allUnits = $list->getAll();
 		$units = $list->getActiveUnits();
 		foreach($units as $control) {
 			if($control->getLevel() == TUnits::LEVEL_CORE
@@ -22,6 +23,7 @@ class TAuManageContainer extends TContainer {
 				$control->create();
 				if(TLocations::controlEnabled($control)
 					&& !$control->IsEnabled() ) {
+						$control->enableDependencies($allUnits);
 						$control->Enable();
 				}
 				

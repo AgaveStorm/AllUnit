@@ -50,7 +50,6 @@ class TAllUnitControl extends TContainer {
 		foreach(TAuFields::getList() as $field) {
 			$Sender->AppendChildTemplate($field, $DOM);
 		}
-//		echo $DOM->saveXml();
 	}
 	
 

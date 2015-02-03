@@ -40,8 +40,7 @@ class TAuField implements IField {
 	}
 	
 	public function GetTemplate() {
-		$template =  TConfigManager::GetTemplate(get_class($this));
-		return $template;
+		return TConfigManager::GetTemplate(get_class($this));
 	}
 	
 	public function beforeSet($value, $single) {

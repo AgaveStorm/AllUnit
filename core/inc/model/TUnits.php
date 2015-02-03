@@ -1,5 +1,6 @@
 <?php
 require_once 'vihv/misc/TFile.php';
+require_once 'TActiveUnits.php';
 
 class TUnits {
 	
@@ -57,8 +58,42 @@ class TUnits {
 			}
 		}
 	}
+	
+	public function getAll() {
+		return $this->units;
+	}
 
 	public function getActiveUnits() {
-		return $this->units;
+		$active = [];
+		$list = new TActiveUnits();
+		$activated = $list->getActiveSlugs();
+		//var_dump($activated);
+		
+		foreach($this->units as $unit) {
+			if($unit->getLevel() == TUnits::LEVEL_CORE
+				|| in_array($unit->getSlug(), $activated )) {
+				$active[] = $unit;
+			}
+		}
+		
+		return $active;
+	}
+	
+	public function getUnitBySlug($slug) {
+		foreach($this->getAll() as $unit) {
+			if($unit->getSlug() == $slug) {
+				return $unit;
+			}
+		}
+		throw EUnitNotFound('Unit '.$slug.' not found');
+	}
+	
+	public function setActive($slug) {
+		$list = new TActiveUnits();
+		$list->setActive($slug, true);
+	}
+	public function setInactive($slug) {
+		$list = new TActiveUnits();
+		$list->setActive($slug, false);
 	}
 }

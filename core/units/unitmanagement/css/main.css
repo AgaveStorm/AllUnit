@@ -1,0 +1,34 @@
+.unitmanagement .unit-list {
+    column-width: 320px;
+    column-gap: 10px;
+    -moz-column-width: 320px;
+    -moz-column-gap: 10px;
+}
+.unitmanagement .single-unit {
+    width: 320px;
+    display: inline-block;
+}
+.unitmanagement .single-unit>.inner {
+    padding: 0 10px;
+    margin-bottom: 10px;
+    border-left: 3px solid transparent;
+}
+.unitmanagement .single-unit.active>.inner {
+    border-left: 3px solid #099;
+}
+.unitmanagement .single-unit h2 {
+    margin: 0;
+}
+.unitmanagement .single-unit .dependencies span+span:before {
+    content: ", ";
+}
+.unitmanagement .single-unit .disable-unit {
+    background: #eee;
+    color: #777;
+}
+.unitmanagement .single-unit .disable-unit span:before {
+    content: "Disable";
+}
+.unitmanagement .single-unit .enable-unit span:before {
+    content: "Enable";
+}

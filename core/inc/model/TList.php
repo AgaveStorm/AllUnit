@@ -1,15 +1,18 @@
 <?php
 
-if(!class_exists('R')) {
-	TConfigManager::GetModel("IRbConfig", $this)->InitRb();	
-}
-
 require_once "TSingle.php";
 
 abstract class TList {
 	
 	const ITEMS_PER_PAGE = 50;
 	
+	public function __construct() {
+		if(!class_exists('R')) {
+			TConfigManager::GetModel("IRbConfig", $this)->InitRb();	
+		}
+	}
+
+
 	abstract public function getSingleModelName();
 	
 	public function getBeanType() {

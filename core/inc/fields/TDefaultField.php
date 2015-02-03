@@ -43,7 +43,7 @@ class TDefaultField extends TAuField implements IField {
 		}
 		if($this->getType() == 'id') {
 			$name = $this->getName()."_id";
-			$id = $this->bean->$name;
+			$id = $single->getRaw($name);
 			if(!empty($id)) {
 				return $id;
 			}

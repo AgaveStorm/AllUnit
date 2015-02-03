@@ -3,6 +3,7 @@
 require_once 'allunit/core/inc/model/TCss.php';
 require_once 'allunit/core/inc/model/TJs.php';
 require_once 'allunit/core/inc/model/TMeta.php';
+require_once 'allunit/core/inc/model/TAuOptions.php';
 
 class TAuHeadControl extends TControl {
 

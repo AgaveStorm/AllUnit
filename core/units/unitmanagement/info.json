@@ -1,6 +1,9 @@
 {
     "class":"TUnitManagementContainer",
+    "title": "Manage Units",
+    "description": "enable/disable units (this page)",
     "design":{
-        "TUnitManagementContainer":"design/TUnitManagementContainer.xsl"
+        "TUnitManagementContainer"  :"design/TUnitManagementContainer.xsl",
+        "TUnitListControl"          :"design/TUnitListControl.xsl"
     }
 }

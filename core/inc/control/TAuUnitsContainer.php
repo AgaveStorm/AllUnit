@@ -9,17 +9,19 @@ class TAuUnitsContainer extends TContainer {
 		$list = TUnits::getInstance();
 		$units = $list->getActiveUnits();
 		foreach($units as $control) {
-			if($control->getLevel() != TUnits::LEVEL_CORE) {
+//			if($control->getLevel() != TUnits::LEVEL_CORE) {
 				$control->create();
 //				var_dump(get_class($control));
 				if(TLocations::controlEnabled($control)
 					&& !$control->IsEnabled() ) {
+//						var_dump($control);
+						$control->enableDependencies($units);
 						$control->Enable();
 //						var_dump(get_class($control));
 
 				}
 				$Sender->AddChild($control);
-			}
+//			}
 		}
 		//var_dump($Sender->Children[3]);
 	}

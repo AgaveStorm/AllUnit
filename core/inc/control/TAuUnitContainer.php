@@ -6,21 +6,26 @@ class TAuUnitContainer extends TContainer {
 	private $path;
 	private $level;
 	private $slug;
+	private $active = false;
 	
 	function __construct($config, $path, $level, $slug) {
 		$this->config = $config;
 		$this->path = $path;
 		$this->level = $level;
 		$this->slug = $slug;
-		//parent::__construct();
 	}
 	
 	function create() {
+		$this->active = true;
 		parent::__construct();
 	}
 	
 	function getTheme() {
 		return @$this->config->design;
+	}
+	
+	function getDependencies() {
+		return @$this->config->require;
 	}
 	
 	function getPath() {
@@ -40,6 +45,29 @@ class TAuUnitContainer extends TContainer {
 			return $this->getSlug();
 		}
 		return $this->config->title;
+	}
+	
+	function getDescription() {
+		return @$this->config->description;
+	}
+	
+	function isActive() {
+		$list = new TActiveUnits();
+		return $this->active || $list->getActive($this->getSlug());
+	}
+	
+	function enableDependencies($units) {
+		$deps = $this->getDependencies();
+		if(empty($deps)) {
+			return;
+		}
+		foreach($units as $control) {
+			if(!$control->isEnabled()) {
+				if(in_array($control->getSlug(), $deps)) {
+					$control->create();
+				}
+			}
+		}
 	}
 	
 	function getUnitUrl() {

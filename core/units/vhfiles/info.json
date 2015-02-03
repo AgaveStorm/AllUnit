@@ -1,5 +1,6 @@
 {
     "class":"TVhFilesUnitControl",
+    "title":"Media Library",
     "design": {
         "TVhFilesUnitControl"       :"design/TVhFilesUnitControl.xsl",
         

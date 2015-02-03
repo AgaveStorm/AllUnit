@@ -7,7 +7,7 @@ class TVhFilesUnitControl extends TAuUnitContainer {
 		TJs::add(TAu::urlRelay('vihv/project/vhfiles/vhfiles.js'),'vhfiles',['vhajax']);
 		TCss::add(TAu::urlRelay('vihv/project/vhfiles/vhfiles.css'));
 		TCss::add(TAu::urlRelay($this->getUnitUrl()."/css/vhfiles.css"));
-		$this->location = new TLocation($this, 'vhfiles');
+		$this->location = new TLocation($this, ['vhfiles']);
 	}
 	
 	function OnGetEvent($Sender, $Input) {

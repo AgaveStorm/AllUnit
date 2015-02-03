@@ -1,8 +1,5 @@
 <?php
 ini_set("include_path",ini_get("include_path").PATH_SEPARATOR.__DIR__);
-require_once 'inc/control/TBkHeaderContainer.php';
-require_once 'inc/control/TBkMainWrapperContainer.php';
-require_once 'inc/control/TBkAjaxContainer.php';
 
 class TBackendContainer extends TAuUnitContainer {
 	
@@ -10,6 +7,15 @@ class TBackendContainer extends TAuUnitContainer {
 
 	function OnCreateEvent($Sender) {
 		self::$instance = $this;
+		$this->location = new TLocation($this, 'au-manage',true);
+		
+	}
+	
+	function OnEnableEvent($Sender) {
+		
+		require_once 'inc/control/TBkHeaderContainer.php';
+		require_once 'inc/control/TBkMainWrapperContainer.php';
+		require_once 'inc/control/TBkAjaxContainer.php';
 
 		TCss::add(TAu::urlRelay('allunit/thirdparty/jqueryui/css/smoothness/jquery-ui-1.10.4.custom.min.css'));
 		TCss::add(TAu::urlRelay('allunit/thirdparty/multiselect/jquery.multiselect.css'));
@@ -22,7 +28,7 @@ class TBackendContainer extends TAuUnitContainer {
 		TJs::add(TAu::urlRelay('allunit/thirdparty/datetimepicker/jquery.datetimepicker.js'),'datetimepicker',['jquery']);
 		
 		TMeta::add('robots','none');
-		$Sender->Enable();
+//		$Sender->Enable();
 		if(TAu::isAjax()) {
 			$Sender->AddChild(new TBkAjaxContainer());
 			return;

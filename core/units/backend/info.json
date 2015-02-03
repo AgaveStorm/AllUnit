@@ -1,6 +1,10 @@
 {
     "class":"TBackendContainer",
     "title":"<i class='fa fa-gear'></i> Backend",
+    "description":"AllUnit managemet console",
+    "require": [
+        "fontawesome","vhfiles","tinymce"
+    ],
     "design": {
         "TBackendContainer"         :"design/TBackendContainer.xsl",
         
