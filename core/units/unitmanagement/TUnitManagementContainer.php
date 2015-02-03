@@ -11,7 +11,7 @@ class TUnitManagementContainer extends TAuUnitContainer {
 		ini_set("include_path",ini_get("include_path").PATH_SEPARATOR.__DIR__);
 		require_once "inc/control/TUnitListControl.php";
 		TCss::add(TAu::urlRelay($this->getUnitUrl()."/css/main.css"));
-		TJs::add(TAu::urlRelay($this->getUnitUrl()."/js/unitmanagement.js",'unitmanagement',['jquery']));
+		TJs::add(TAu::urlRelay($this->getUnitUrl()."/js/unitmanagement.js"),'unitmanagement',['jquery']);
 		$Sender->AddChild(new TUnitListControl());
 
 	}

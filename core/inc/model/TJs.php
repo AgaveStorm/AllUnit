@@ -31,7 +31,7 @@ class TJs {
 	function getAll() {
 		$inst = TJs::getInstance();
 		$items = $inst->items;
-		//var_dump($items);
+//		var_dump($items);
 		$allIds = array_column($items, 'id');
 		foreach($items as $item) {
 			foreach($item['deps'] as $dep) {
@@ -59,10 +59,10 @@ class TJs {
 			foreach($item['deps'] as $dep) {
 				if(in_array($dep, $already)) {
 					$ok = true;
-				} else {
-					$ok = false;
-					break;
-				}
+					continue;
+				} 
+				$ok = false;
+				break;
 			}
 			
 			if($ok) {
