@@ -59,7 +59,9 @@ class TJs {
 			foreach($item['deps'] as $dep) {
 				if(in_array($dep, $already)) {
 					$ok = true;
-					continue;
+				} else {
+					$ok = false;
+					break;
 				}
 			}
 			
