@@ -4,7 +4,15 @@ require_once 'allunit/core/inc/model/TUnits.php';
 
 
 class TAuManageContainer extends TContainer {
-
+	
+	function getChildren() {
+		return $this->Children;
+	}
+	
+	function removeChild($index) {
+		unset($this->Children[$index]);
+	}
+	
 	function OnCreateEvent($Sender){
 		$Sender->myLocation = new TLocation($Sender,TAu::MANAGE,TLocation::INCLUDE_CHILDREN);
 		if($Sender->myLocation->current()) {
@@ -30,6 +38,7 @@ class TAuManageContainer extends TContainer {
 				$Sender->AddChild($control);
 			}
 		}
+		TEventManager::DoEvent('OnAuManageUnitsAdded', $this);
 	}
 
 	public function GetTemplate() {
