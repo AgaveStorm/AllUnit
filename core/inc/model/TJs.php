@@ -86,6 +86,7 @@ class TJs {
 	
 	function getMinified() {		
 		foreach(self::getAll() as $item) {
+//			var_dump($item);
 			$pathinfo = pathinfo($item);
 			$list[$pathinfo['extension']][$pathinfo['dirname']][] = $pathinfo['basename'];
 		}
@@ -107,6 +108,7 @@ class TJs {
 				}
 			}
 		}
+//		var_dump($re);
 		return $re;
 	}
 	

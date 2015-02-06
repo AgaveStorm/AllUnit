@@ -18,9 +18,9 @@ class TBkLoginControl extends TControl {
 			$list = TConfigManager::GetModel('IUsers', $this);
 			$user = $list->getCurrentUser();
 //			var_dump($user);
-			if($user->hasBackendAccess()) {
+			//if($user->hasBackendAccess()) {
 				$Sender->Enable();
-			}
+//			}
 		}
 	}
 	

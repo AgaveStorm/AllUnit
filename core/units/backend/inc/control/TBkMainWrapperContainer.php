@@ -12,18 +12,33 @@ class TBkMainWrapperContainer extends TContainer {
 		$Login = new TBkLoginControl();
 		$Sender->AddChild($Login);
 		if(TAuthorizationManager::IsLogged()) {
-			$Sender->AddChild(new TBkSiteOptionsControl());
-			$Sender->AddChild(new TBkContentTypesContainer());
+			$list = TConfigManager::GetModel('IUsers', $this);
+			$user = $list->getCurrentUser();
+			if($user->hasBackendAccess()) {
+				$Sender->AddChild(new TBkSiteOptionsControl());
+				$Sender->AddChild(new TBkContentTypesContainer());
+			}
 		}
 	}
 	
 	function OnAuManageUnitsAddedEvent($Sender, $aumanage) {
+		$grainted = false;
+		if(TAuthorizationManager::IsLogged()) {
+			$list = TConfigManager::GetModel('IUsers', $this);
+			$user = $list->getCurrentUser();
+			$grainted = $user->hasBackendAccess();
+		}
 		$children = $aumanage->getChildren();
 		foreach($children as $key=>$value) {
 			if(get_class($value) == 'TBackendContainer') {
 				continue;
 			}
 			$aumanage->removeChild($key);
+			if(!$grainted) {
+				$value->Disable();
+				continue;
+			};
+			
 			$Sender->AddChild($value);
 		}
 	}
