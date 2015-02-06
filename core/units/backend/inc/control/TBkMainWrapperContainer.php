@@ -37,7 +37,7 @@ class TBkMainWrapperContainer extends TContainer {
 			if(!$grainted) {
 				$value->Disable();
 				continue;
-			};
+			}
 			
 			$Sender->AddChild($value);
 		}
