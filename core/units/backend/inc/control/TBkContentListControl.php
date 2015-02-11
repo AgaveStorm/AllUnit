@@ -58,7 +58,7 @@ class TBkContentListControl extends TControl {
 			$Sender->Data['itemsperpage'] = $count;
 		}
 		
-		$Sender->Data['paginationLinks'] = $this->createPagination($Sender->Data['itemsperpage'], $list->getTotal());
+		$Sender->Data['paginationLinks'] = $this->createPagination($Sender->Data['itemsperpage'], $list->getTotal($Input));
 		$Sender->Data['currentPage'] = (int)$Input['page']+1;
 		$fieldNames = array_column($fields, 'name');
 		$Sender->Data['sortLinks'] = $this->createSortLinks($fieldNames);

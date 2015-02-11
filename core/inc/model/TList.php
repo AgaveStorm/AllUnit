@@ -42,8 +42,10 @@ abstract class TList {
 		return $res;
 	}
 	
-	public function getTotal() {
-		return R::count($this->getViewName());
+	public function getTotal($Input = []) {
+		$fields = $this->getFieldObjects();
+		$where = $this->createWhere($fields, $Input);
+		return R::count($this->getViewName(),$where);
 	}
 	
 	public function getList($Input) {
