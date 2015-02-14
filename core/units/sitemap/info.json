@@ -1,0 +1,9 @@
+{
+    "class":"TSitemapContainer",
+    "title":"<i class='fa fa-gear'></i> Sitemap",
+    "description":"Automatically create sitemap for search engines to index your website better, also you can view all listed urls in backend (click units->sitemap)",
+    "design": {
+        "TSitemapContainer"         :"design/TSitemapContainer.xsl",
+        "sitemap-TFrontendControl"  :"design/sitemap-TFrontendControl.xsl"
+    }
+}

@@ -25,17 +25,18 @@ class TAuManageContainer extends TContainer {
 		$allUnits = $list->getAll();
 		$units = $list->getActiveUnits();
 		foreach($units as $control) {
+			$control->create();
 			if($control->getLevel() == TUnits::LEVEL_CORE
 				|| $control->allowBackend()
 				) {
-				$control->create();
+				//$control->create();
 				if(TLocations::controlEnabled($control)
 					&& !$control->IsEnabled() ) {
 						$control->enableDependencies($allUnits);
 						$control->Enable();
 				}
-				
 				$Sender->AddChild($control);
+				
 			}
 		}
 		TEventManager::DoEvent('OnAuManageUnitsAdded', $this);

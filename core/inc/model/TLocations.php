@@ -21,6 +21,9 @@ class TLocations {
 		$inst->locations[] = $location;
 	}
 	
+	/**
+	 * @return all locations (as array of TLocation)
+	 */
 	public function getAll() {
 		$inst = TLocations::getInstance();
 		return $inst->locations;

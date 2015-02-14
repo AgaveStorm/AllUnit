@@ -6,7 +6,7 @@ class TBkContentListControl extends TControl {
 
 	function OnCreateEvent($Sender) {
 		$this->SetEvent('list', array($this, 'OnListEvent'));
-		$this->location = new TLocation($this, [TAu::MANAGE,"content","*"]);
+		$this->location = new TLocation($this, [TAu::MANAGE,"content",new TVmSlugLocVar()]);
 		if($this->location->current()) {
 			$Sender->Enable();
 		}

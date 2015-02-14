@@ -1,12 +1,14 @@
 <?php
 
+require_once 'inc/model/TVmSlugLocVar.php';
+require_once 'inc/model/TVmLocVar.php';
 
 class TBkContentEditControl extends TControl {
 	public function OnCreateEvent($Sender) {
 		$this->SetEvent('OnAdd', array($this, 'OnAddEvent'));
 		$this->SetEvent('OnEdit', array($this, 'OnEditEvent'));
-		$this->locationAdd = new TLocation($this, [TAu::MANAGE,'content','*','add']);
-		$this->locationEdit = new TLocation($this, [TAu::MANAGE, 'content','*','edit','*']);
+		$this->locationAdd = new TLocation($this, [TAu::MANAGE,'content',new TVmSlugLocVar(),'add'], null, array($this,'addTitleFunc'));
+		$this->locationEdit = new TLocation($this, [TAu::MANAGE, 'content',new TVmSlugLocVar(),'edit',new TVmLocVar('id')], null, array($this,'editTitleFunc'));
 		if($this->locationAdd->current()) {
 			$Sender->OnAdd();
 			$Sender->Enable();
@@ -15,6 +17,23 @@ class TBkContentEditControl extends TControl {
 			$Sender->OnEdit();
 			$Sender->Enable();
 		}
+	}
+	
+	public function addTitleFunc($slug, $vars) {
+		$modelSlug = reset($vars);
+		$factory = TConfigManager::GetModel('IViewModelFactory');
+		$vm = $factory->createBySlug($modelSlug);
+		return "Add ".$vm->getTitle();
+	}
+	
+	public function editTitleFunc($slug, $vars) {
+		$modelSlug = reset($vars);
+		$id = next($vars);
+		$factory = TConfigManager::GetModel('IViewModelFactory');
+		$vm = $factory->createBySlug($modelSlug);
+		$list = $vm->getListModel();
+		$item = $list->getOne($id);
+		return "Edit ".$vm->getTitle()." ".$item->getTitle();
 	}
 	
 	private function getViewModel() {
