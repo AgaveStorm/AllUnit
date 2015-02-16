@@ -35,7 +35,7 @@ class TLocVar implements ILocVar {
 				continue;
 			}
 			$re[] = new TLocVarValue(
-				$item->get('field'), 
+				$item->get($this->field), 
 				$item->getTitle() 
 				);
 		}
